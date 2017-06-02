@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <title>管理中心-商品分类管理</title>
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/manage.css">
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./manage_product_category_list" data-main="/src/js/config.js"></script>
+	<style type="text/css">     
+	.td{border:solid #add9c0; border-width:0px 1px 1px 0px; padding:10px 0px;}
+	.table{border:solid #add9c0; border-width:1px 0px 0px 1px;}
+	
+	.td2{border:solid #add9c0; border-width:1px 1px 1px 1px; padding:8px 0px;}
+	.table2{border:solid #add9c0; border-width:1px 0px 0px 0px;}
+	</style> 
+	
+    <!--[if lt IE 9]>
+        <script src="/lib/html5shiv.min.js"></script>
+        <script src="/lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <!--include "../public/manage_sidebar.html"-->
+    <!--include "../public/manage_header.html"-->
+    <div class="container-wrap">
+        <div class="bread-nav clearfix p-l-lg">
+            <ol class="fl">
+                <li class="fl active text-333 text-basic"><a href="javascript:void(0);">商品分类列表</a></li>
+            </ol>
+              <div class="fr">
+                <a href="/page/manage_product_category_add.html?lid=2" class="btn btn-primary m-r-lg text-basic">+添加商品分类</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="m-r-lg m-l-lg">
+                <div class="table-responsive">
+                    <table class="table table-hover m-t" width="100%" style="min-width:100%;">
+                        <thead>
+                            <tr>
+                                <th class="font-normal text-basic td" width="5%">编号</th>
+                                <th class="font-normal text-basic td" width="10%">商品分类名称</th>
+                                <th class="font-normal text-basic td" width="10%">创建时间</th>
+                                <th class="font-normal text-basic td" width="10%">状态</th>
+                                <th class="font-normal text-basic td" width="10%">推荐</th>
+                                <th class="font-normal text-basic td" width="20%">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-666" id="table-list-content">
+								<!-- 展示一级分类信息 -->
+                        </tbody>
+                       
+                    </table>
+                    <div id="cloading" class="hide">
+                        <div id="loadmore"></div>
+                    </div>
+                </div>
+                <div class="pages fr">
+                    <ul id="pagination" class="pagination-container"></ul>
+                    <div class="page-sum text-right text-999 text-basic">当前页面总数：<span class="text-333" id="page-sum">0</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--include "../public/del_modal.html"-->
+	
+<!-- 展示一级分类信息 -->	
+ <script id="table-list-tpl" type="text/html">
+    {{each dataList as value i}}
+		<tr>
+			<td class="td"><span>{{i+1}}</span>
+			<img src="/src/image/add.png" alt=""
+                                                     style="display: block;  width: 14px;  height: 13px;margin-right: 1px;" id="img_{{value.categoryId}}" god="{{value.categoryId}}" class="showorhidechildcategory"></td>
+            <td class="td"><span class="inline-block text-ellipsis text-basic" >{{value.categoryName}}</span></td>
+            <td class="td"><span class="inline-block text-ellipsis text-basic">{{value.createTime}}</span></td>
+            <td class="td"><span class="inline-block text-ellipsis text-basic">{{if value.state==1}}开启{{else}}关闭{{/if}}</span></td>
+            <td class="td"><span class="inline-block text-ellipsis text-basic">{{if value.recommend==1}}是{{else}}否{{/if}}</span></td>
+            <td class="td">{{if value.parentId==0}}<a href="/page/manage_product_category_add.html?parentId={{value.categoryId}}&lid=2">添加子类</a>{{/if}}
+								<a href="/page/manage_product_category_add.html?id={{value.categoryId}}&parentId={{value.parentId}}&lid=2">编辑</a><a href="javascript:void(0)" god="{{value.categoryId}}" gnm="{{value.categoryName}}" class="del-btn">删除</a></td>
+        </tr>
+		<tr id="child_{{value.categoryId}}" style="display:;">
+			<td colspan="6">
+				<table width="100%" class="table2"  style="min-width:100%;" id="child_table_{{value.categoryId}}">
+					<!-- 展示二级分类信息 -->
+				</table>
+			</td>
+		</tr>
+	{{/each}}
+</script>	
+				
+<!-- 展示二级分类信息 -->					
+ <script id="child_table_tp" type="text/html">
+    {{each dataList as value i}}
+		<tr>
+			<td class="td"><span>{{i+1}}</span></td>
+			<td class="td"><span class="inline-block text-ellipsis text-basic" >{{value.categoryName}}</span></td>
+            <td class="td"><span class="inline-block text-ellipsis text-basic">{{value.createTime}}</span></td>
+            <td class="td"><span class="inline-block text-ellipsis text-basic">{{if value.state==1}}开启{{else}}关闭{{/if}}</span></td>
+            <td class="td"><span class="inline-block text-ellipsis text-basic">{{if value.recommend==1}}是{{else}}否{{/if}}</span></td>
+            <td class="td">	<a href="/page/manage_product_category_add.html?id={{value.categoryId}}&parentId={{value.parentId}}&lid=2">编辑</a><a href="javascript:void(0)" god="{{value.categoryId}}" gnm="{{value.categoryName}}" class="del-btn">删除</a></td>
+		</tr>
+	{{/each}}
+</script>
+	
+</body>
+</html>

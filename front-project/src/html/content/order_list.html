@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>我的订单</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./order_list"
+            data-main="/src/js/config.js"></script>
+    <style type="text/css">
+        .weui-form-preview__btn:active {
+            color: #686868;
+        }
+        .weui-navbar__item.weui-bar__item--on {
+            background: #eaeaea;
+            color: #414141;
+        }
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .order-list-block:before {
+            border-top: none;
+        }
+        .weui-navbar__item div {
+            position: absolute;
+            width: 60%;
+            left: 20%;
+            height: 4px;
+            background: #EAEAEA;
+            top: 47px;
+        }
+        .active_div {
+            background: #2CC27B!important;
+        }
+        .weui-navbar__item {
+            background: #eaeaea;
+            color: #414141;
+        }
+        #order-list a:after{
+            border-right: none;
+        }
+    </style>
+</head>
+
+<body class="grey-body">
+<div class="weui-navbar" id="order-list">
+    <a class="weui-navbar__item weui-bar__item--on weui-tab__bd-item--active" state="" id="all">全部 <div class="active_div"></div></a>
+    <a class="weui-navbar__item" id="noPay" state="1" >未付款<div></div></a>
+    <a class="weui-navbar__item" id="pay" state="2" >已付款<div></div></a>
+</div>
+<br/>
+<div class="weui-cells">
+    <div class="weui-cell" style="background-color:#FFFFFF;">
+        <div class="weui-btn" style="width: 45%; float: left; ">
+            <select id="paymentId" class="weui-select " style="font-size: small;">
+                <option selected="" value="">选择付款方式</option>
+                <option value="2">在线付款</option>
+                <option value="3">累计结算</option>
+                <option value="1">货到付款</option>
+            </select>
+        </div>
+        <div style="width: 10%;">
+
+        </div>
+        <div class="weui-btn" style="width: 45%;">
+            <select id="logisticsState" class="weui-select" style="font-size: small;">
+                <option selected="" value="">选择配送情况</option>
+                <option value="1">等待配送</option>
+                <option value="2">已配送</option>
+                <option value="3">已确认收货</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div id="order-box" class="weui-cells" style="margin-top: 10px;">
+
+</div>
+<script type="text/html" id="order-box-tpl">
+    {{each dataList as value i}}
+    <div class="weui-cells order-list-block" style="margin-top:0;background: #fff;border-bottom: 10px solid #F0F0F0;">
+        <div style="position: relative;padding-bottom: 15px;padding-top: 15px;">
+            <a href="/page/order_detail.html?id={{value.orderNumber}}" class="clearfix">
+                <span style="color: #999;font-size: 14px;padding-left: 15px;">订单号：{{value.orderNumber}}</span>
+            </a>
+            <div style="position:absolute;right:15px;top:12px;">
+                {{if value.payState==1}}
+                <a href="pay_check.html?orderNumber={{value.orderNumber}}&price={{value.totalAmount/100}}"
+                   class="weui-btn weui-btn_disabled weui-btn_mini"
+                   style="color: #fff;background: #2BC17A;">去付款</a>
+                {{/if}}
+            </div>
+        </div>
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                {{each value.orderDetailsList as value2 j}}
+                {{if j < 5}}
+                <a href="javascript:;">
+                    <img src="{{value2.image}}" style="width: 50px;  height: 50px; float: left;margin-right: 10px;">
+                </a>
+                {{/if}}
+                {{/each}}
+            </div>
+        </label>
+
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p style="color: #07141e;font-size: 14px;">下单时间：{{value.createTime}}</p>
+
+                <p>
+                    <span style="font-size: 14px;">订单金额：</span>
+                    <span style="color:#FF715B;">¥{{value.totalAmount}}</span>
+                </p>
+
+                <p class="clearfix"><span style="color: #07141e;color: #838383;font-size:14px;float: left">{{value.payment.name}}
+                    &nbsp&nbsp&nbsp&nbsp
+                    {{if value.logisticsState==0}}未配送 {{else if value.logisticsState==1}}等待配送
+                    {{else if value.logisticsState==2}}已配送{{else if value.logisticsState==3}}已确认收货
+                    {{/if}}</span>
+                    <a href="javascript:void(0);" class="send-modal" oNum="{{value.orderNumber}}"
+                       style="color: #2BC17A;font-size: 14px;float: right;">再次购买</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+<div class="weui-loadmore" id="weui-loadmore" style="padding-bottom:80px;">
+    <i class="weui-loading"></i>
+    <span class="weui-loadmore__tips"></span>
+</div>
+<div class="weui-loadmore weui-loadmore_line hide" id="weui-none" style="padding-bottom:50px;">
+    <span class="weui-loadmore__tips">暂无数据</span>
+</div>
+</body>
+
+</html>

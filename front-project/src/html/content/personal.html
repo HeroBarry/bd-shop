@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>个人中心</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./personal" data-main="/src/js/config.js"></script>
+    <style>
+        body {
+            line-height: normal;
+        }
+
+        .log-out-btn:after {
+            border: none;
+        }
+
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        * {
+            font-family: -apple-system-font, "Helvetica Neue", Helvetica, sans-serif;
+        }
+    </style>
+
+</head>
+<body class="grey-body">
+<div class="weui-msg" style="background:url(/src/image/banner.png) no-repeat center center; height: 150px;"
+     id="user-info">
+    <script id="user-info-tpl" type="text/html">
+        <a href="/page/personalAcc.html">
+            <div class="weui-msg__icon-area" style="margin-bottom: 0;">
+                <img  onerror="javascript:this.src='/src/image/defaulr_portrait.png '" class="weui-icon-1" class="img" style="width: 50px;height: 50px;border-radius: 50%;"
+                     src="{{headimgurl}}">
+            </div>
+            <div class="weui-msg__text-area">
+                <h2 style="color: #fff;font-size: 16px;">{{if nickname==""}} <a href="" style="color: #fff;"></a>
+                    {{else}}{{nickname}} {{/if}}</h2>
+                <p style="display: inline-block;border: 1px solid #fff;border-radius: 15px;color: #fff;padding: 2px 15px;margin-top: 10px;">
+                    享受累计结算服务</p>
+            </div>
+        </a>
+    </script>
+</div>
+<div class="weui-cells page__category-content" style="margin-top: 0;border-top: 20px solid #F0F0F0;font-family: -apple-system-font, " Helvetica Neue
+", Helvetica, sans-serif;">
+<a class="weui-cell weui-cell_access js_item" data-id="button" href="/page/myStoreGoods.html">
+    <img src="/src/image/i_03.png" alt="" style="width:20px;height:20px">
+    <div class="weui-cell__bd">
+        <p>&nbsp;&nbsp;&nbsp;我的商品收藏</p>
+    </div>
+    <div class="weui-cell__ft"></div>
+</a>
+<a class="weui-cell weui-cell_access js_item" data-id="input" href="/page/order_list.html">
+    <img src="/src/image/i_07.png" alt="" style="width:20px;height:20px">
+    <div class="weui-cell__bd">
+        <p>&nbsp;&nbsp;&nbsp;我的订单</p>
+    </div>
+    <div class="weui-cell__ft"></div>
+</a>
+<a class="weui-cell weui-cell_access js_item" data-id="list" href="/page/order_settle_list.html">
+    <img src="/src/image/i_09.png" alt="" style="width:20px;height:20px">
+    <div class="weui-cell__bd">
+        <p>&nbsp;&nbsp;&nbsp;一键结算订单</p>
+    </div>
+    <div class="weui-cell__ft"></div>
+</a>
+</div>
+<div class="weui-cells page__category-content" style="margin-top: 0;border-top: 20px solid #F0F0F0;">
+    <a class="weui-cell weui-cell_access js_item" data-id="button" href="/page/address_list.html">
+        <img src="/src/image/i_11.png" alt="" style="width:20px;height:20px">
+        <div class="weui-cell__bd">
+            <p>&nbsp;&nbsp;&nbsp;收货地址管理</p>
+        </div>
+        <div class="weui-cell__ft"></div>
+    </a>
+    <a class="weui-cell weui-cell_access js_item" data-id="input" href="/page/stationMessage.html">
+        <img src="/src/image/i_13.png" alt="" style="width:20px;height:20px">
+        <div class="weui-cell__bd">
+            <p> &nbsp;&nbsp;&nbsp;站内通知</p>
+        </div>
+        <div class="weui-cell__ft"></div>
+    </a>
+</div>
+<script type="text/javascript" src="/src/font/iconfont.js"></script>
+<!--include "../public/footer.html"-->
+</body>
+</html>

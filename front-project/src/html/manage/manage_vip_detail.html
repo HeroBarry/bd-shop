@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <title>会员详情</title>
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/manage.css">
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./manage_vip_detail" data-main="/src/js/config.js"></script>
+    <!--[if lt IE 9]>
+        <script src="/lib/html5shiv.min.js"></script>
+        <script src="/lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <!--include "../public/manage_sidebar.html"-->
+    <!--include "../public/manage_header.html"-->
+    <div class="container-wrap">
+        <div class="bread-nav clearfix p-l-lg">
+            <ol class="fl">
+                <li class="fl text-333 text-basic"><a href="javascript:void(0);" onclick="window.history.go(-1);">会员管理&nbsp;&gt;&nbsp;</a></li>
+                <li class="fl active text-333 text-basic"><a href="javascript:void(0);">会员详情</a></li>
+            </ol>
+        </div>
+        <form class="form-horizontal p-t-lg" id="form-box">
+            <div class="fr">
+                <input type="submit" id="submit-btn" value="保存" class="btn btn-primary m-r-lg text-basic">
+                <a href="javascript:void(0);" class="btn btn-default m-r-lg text-basic" onclick="window.history.go(-1);">返回</a>
+            </div>
+
+
+         <h2 class="b-b text-md p-b-lg p-t-lg p-l-lg">会员详情</h2>
+        <div id="userDetail">
+
+        </div>
+        <script id="list-box-tpl" type="text/html">
+            <input  type="hidden" value="{{obj.userId}}"  name="user.userId" id=""/>
+            <div class="row text-basic line-height-md p-b-md">
+                <div class="col-lg-2 text-right text-333">
+                    <span>用户名</span>
+                </div>
+                <div class="col-lg-10">
+                    <span>{{obj.nickname}}</span>
+                </div>
+            </div>
+            <div class="row text-basic line-height-md p-b-md">
+                <div class="col-lg-2 text-right text-333">
+                    <span>会员手机</span>
+                </div>
+                <div class="col-lg-10">
+                    <span>{{obj.phone}}</span>
+                </div>
+            </div>
+            <div class="row text-basic line-height-md p-b-md">
+                <div class="col-lg-2 text-right text-333">
+                    <span>注册时间</span>
+                </div>
+                <div class="col-lg-10">
+                    <span>{{obj.createTime}}</span>
+                </div>
+            </div>
+        </script>
+        <h2 class="b-b text-md p-b-lg p-t-lg p-l-lg">权限设置</h2>
+        <div >
+            <div class="row text-basic line-height-md p-b-md">
+                <div class="col-lg-2 text-right text-333">
+                    <span>商品优惠设置：</span>
+                </div>
+
+                <div class="col-lg-10" id="privilege">
+                </div>
+                <script type="text/html" id="privilege-tp">
+                    <input  name="isWholeSalePrice" id="isWholeSalePrice" type="checkbox" {{if obj.isWholeSalePrice== 1}} checked {{/if}}>
+                            <span>享受批发价</span><br>
+                            <input  value="" id="isDiscount" name="isDiscount" type="checkbox" {{if obj.isDiscount== 1}} checked {{/if}}>
+                            <span>商品折扣</span>
+                            <input type="text" id="discount" name="discount" style="width: 50px;border:solid 1px grey" value="{{obj.discount}}"/>%
+                            （注：0到100之间）
+                </script>
+            </div>
+            <div class="row text-basic line-height-md p-b-md">
+                <div class="col-lg-2 text-right text-333">
+                    <span>付款方式设置：</span>
+                </div>
+                <div class="col-lg-10" id="method">
+                </div>
+                <script type="text/html" id="method-tp">
+                    {{each obj as value i}}
+                         <input  value="{{value.paymentId}}" name="paymentbox" type="checkbox" {{if value.isOwnered==1}} checked {{/if}}>
+                        <span>{{value.name}}</span><br>
+                    {{/each}}
+                </script>
+            </div>
+        </div>
+        </form>
+    </div>
+</body>
+</html>

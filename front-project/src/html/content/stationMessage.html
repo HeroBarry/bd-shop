@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./stationMessage"
+            data-main="/src/js/config.js"></script>
+    <title>站内信息</title>
+    <style>
+        .weui-navbar__item.weui-bar__item--on {
+            background: #eaeaea;
+            color: #414141;
+        }
+
+        .weui-navbar__item div {
+            position: absolute;
+            width: 60%;
+            left: 20%;
+            height: 4px;
+            background: #EAEAEA;
+            top: 47px;
+        }
+
+        .weui-navbar__item.weui-tab__bd-item--active div {
+            background: #2CC27B;
+        }
+
+        .msg-tab-navbar .weui-tab__bd-item li {
+            padding: 0 15px;
+            background: #fff;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+        }
+
+        .msg-tab-navbar .weui-tab__bd-item li div:first-child {
+            padding-top: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .msg-tab-navbar .weui-tab__bd-item li div:last-child {
+            overflow: hidden;
+            color: #666;
+            max-height: 50px;
+        }
+
+        .msg-tab-navbar .weui-tab__bd-item li div:first-child span {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .weui-navbar__item:after {
+            border: none;
+        }
+
+        .weui-navbar__item {
+            background: #eaeaea;
+            color: #414141;
+        }
+    </style>
+</head>
+<body ontouchstart class="grey-body">
+<div class="weui-tab msg-tab-navbar">
+    <div class="weui-navbar">
+        <a class="weui-navbar__item weui-bar__item--on weui-tab__bd-item--active" href="#tab1" id="noReadNar">
+            <span id="noReadNarBtn"></span>
+            <div></div>
+        </a>
+        <a class="weui-navbar__item" href="#tab2" id="readedNar">
+            <span id="readNarBtn"></span>
+            <div></div>
+        </a>
+    </div>
+    <div class="weui-tab__bd">
+        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+            <ul id="msg-list">
+
+            </ul>
+            <script type="text/html" id="msg-list-tpl">
+                {{each dataList as value i}}
+                <li>
+                    <a class="send-modal" href="javascript:;" id="{{value.messageId}}" url="{{value.url}}"
+                       userMsgId="{{value.userMessageId}}" style="display: block;">
+                        <div>
+                            <h4>{{value.messageTitle}}</h4>
+                            <span>{{value.pushTime}}</span>
+                        </div>
+                        <div>
+                            {{value.messageContext}}
+                        </div>
+                    </a>
+                </li>
+                {{/each}}
+            </script>
+        </div>
+    </div>
+</div>
+</body>
+</html>

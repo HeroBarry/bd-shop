@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>一键结算订单</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./order_settle_list"
+            data-main="/src/js/config.js"></script>
+    <style type="text/css">
+        body {
+            background-color: #FFF;
+            line-height: normal;
+        }
+
+        * {
+            font-family: -apple-system-font, "Helvetica Neue", Helvetica, sans-serif;
+        }
+
+        #order-amount3:after {
+            content: " ";
+            position: absolute;
+            height: 0px;
+            width: 100%;
+            top: 1px;
+            left: 0;
+            border-top: 1px solid #ddd;
+        }
+
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .img-list:before {
+            right: 15px;
+        }
+
+        .order-info-list:before {
+            right: 15px;
+        }
+    </style>
+</head>
+
+<body class="grey-body" ontouchstart="">
+
+<div id="order-box" class="weui-cells" style="margin-top:0;overflow: auto;">
+</div>
+
+<div class="weui-loadmore" id="weui-loadmore" style="padding-bottom:80px;">
+    <i class="weui-loading"></i>
+    <span class="weui-loadmore__tips"></span>
+</div>
+<div class="weui-loadmore weui-loadmore_line hide" id="noRec" style="padding-bottom:50px;">
+    <span class="weui-loadmore__tips">暂无数据</span>
+</div>
+<script type="text/html" id="order-box-tpl">
+    {{each dataList as value i}}
+    <div class="weui-cells weui-cells_checkbox order-list" style="background-color: #FFFFFF;margin-top: 0;border-bottom: 10px solid #F0F0F0;">
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__hd haspay">
+                <input type="checkbox" class="weui-check chosen" id="checkbox_{{i}}" name="checkbox"
+                       value="{{value.orderNumber}}" Money="{{value.totalAmount}}"  {{if value.payState==2}} disabled {{/if}}>
+                <i class="weui-icon-checked"></i>
+            </div>
+            <p style="color: #999;float: left;font-size: 14px;">订单号：{{value.orderNumber}}</p>
+            {{if value.payState==1}}
+            <a href="javascript:void(0);" class="weui-btn weui-btn_disabled weui-btn_mini"
+               style="position:absolute;color: #fff;background: #2BC17A;right: 15px;top: 10px;">去付款</a>
+            {{/if}}
+        </label>
+
+
+        <label class="weui-cell img-list">
+            <div class="weui-cell__bd">
+                {{each value.orderDetailsList as value2 j}}
+                {{if j < 5}}
+                <a href="javascript:;">
+                    <img src="{{value2.image}}" style="width: 50px;  height: 50px; float: left;margin-right: 10px;">
+                </a>
+                {{/if}}
+                {{/each}}
+            </div>
+        </label>
+        <div class="weui-cell order-info-list">
+            <div class="weui-cell__bd">
+                <input type="hidden"  id="time_{{i}}" value={{value.createTime}} >
+                <p style="color: #07141e;font-size:14px;">下单时间：{{value.createTime}}</p>
+                <p style="font-size: 14px;color: #07141e;">
+                    <span style="">订单金额：</span>
+                    <span style="color:  #FF715B;">¥{{value.totalAmount}}</span>
+                    <input type="hidden" class="totalAmount" id="totalAmount_{{i}}" value="{{value.totalAmount}}"/>
+                </p>
+                <p style="color: #07141e;color: #838383;font-size:14px;" class="clearfix">
+                    <span style="color: #07141e;color: #838383;font-size:14px;float: left">
+                        {{value.payment.name}}
+                    &nbsp&nbsp&nbsp&nbsp
+                    {{if value.logisticsState==0}}未配送 {{else if value.logisticsState==1}}等待配送
+                    {{else if value.logisticsState==2}}已配送{{else if value.logisticsState==3}}已确认收货
+                    {{/if}}
+                    </span>
+                    <a href="javascript:void(0);" class="send-modal" oNum="{{value.orderNumber}}" style="float: right;color: #2BC17A;"> 再次购买 </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+<!--底部固定按钮  -->
+<div class="weui-tabbar" style="bottom: 0px; position: fixed;">
+    <div class="weui-cell__bd">
+        <div class="clearfix" style="padding: 5px 0;">
+            <div class="weui-cell__ft" style="width: 50%; float: left; text-align: center;">
+                <p style="margin-left: 15px;text-align: left;">
+                    已选择<span id="num" style="color: #2BC17A;"></span>个订单
+                </p>
+            </div>
+            <div style="float:right;width:50%;">
+                <label style="color: grey;font-size: 14px;"><p>注：单笔不超过10000元</p></label>
+            </div>
+        </div>
+        <div class="weui-cell__ft" style="width: 50%; float: left; text-align: center;border-top: 1px solid #ddd;" id="money">
+            <div class="weui-cell">
+                <p style="float: left; text-align: center;color: #333;">
+                    合计：<span style="color: #FE725B;">¥ </span><span id="total-money" style="color: #FE725B;"></span> 元
+                </p>
+            </div>
+        </div>
+        <div style="float:right;width:50%;">
+            <a href="javascript:;" class="weui-btn weui-btn_primary"
+               style="background-color: #2CC17B;border-radius: 0px;color: #fff;" id="order_submit">结算</a>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

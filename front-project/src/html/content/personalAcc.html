@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>个人账户</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./personalAcc" data-main="/src/js/config.js"></script>
+
+</head>
+<body ontouchstart>
+<!--<div class="weui-cells">-->
+    <!--<a class="weui-cell weui-cell_access" href="javascript:;">-->
+        <!--<div class="weui-cell__bd">-->
+            <!--<p>cell standard</p>-->
+        <!--</div>-->
+        <!--<div class="weui-cell__ft">说明文字</div>-->
+    <!--</a>-->
+    <!--<a class="weui-cell weui-cell_access" href="javascript:;">-->
+        <!--<div class="weui-cell__bd">-->
+            <!--<p>cell standard</p>-->
+        <!--</div>-->
+        <!--<div class="weui-cell__ft">说明文字</div>-->
+    <!--</a>-->
+
+<!--</div>-->
+<div id="user-info" class="weui-cells" style="margin-top: 0;">
+
+</div>
+<script id="user-info-tpl" type="text/html">
+<a class="weui-cell weui-cell_access" href="javascript:;">
+    <div class="weui-cell__bd">
+        <p>头像</p>
+    </div>
+    <div class="weui-cell__ft" style="height:50px;">
+        <img src="{{headimgurl}}" alt=""  onerror="javascript:this.src='/src/image/defaulr_portrait.png '" style="width:50px;height:100%;margin-right:15px;display:block;border-radius: 50%;" >
+        <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*">
+    </div>
+</a>
+<a class="weui-cell weui-cell_access" href="javascript:;">
+    <div class="weui-cell__bd">
+        <p>昵称</p>
+    </div>
+    <div class="weui-cell__ft">
+        <input class="weui-input" type="text" style="text-align:right" id="nickname" value="{{nickname}}" >
+    </div>
+
+</a>
+<a class="weui-cell weui-cell_access" href="javascript:;">
+    <div class="weui-cell__bd">
+        <p>手机号码</p>
+    </div>
+    <div class="weui-cell__ft">
+        <input class="weui-input" type="text" style="text-align:right" id="phone" value="{{phone}}" >
+    </div>
+</a>
+ <div id="save" style="padding: 0 15px; margin-top:50px;">
+    <div class="weui-btn weui-btn_primary" style="background-color:#2CC27B;">保存</div>
+</div>
+</script>
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>首页</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.min.css"/>
+    <script type="text/javascript" src="/src/libs/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/src/libs/TouchSlide.1.1.js"></script>
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="/src/js/index.js"
+            data-main="/src/js/config.js"></script>
+    <style>
+        * {
+            font-family: -apple-system-font, '微软雅黑', Helvetica, sans-serif;
+            font-size: 15px;
+        }
+
+        .weui-btn:after {
+            border: none;
+        }
+
+        body {
+            line-height: normal;
+        }
+
+        .index-info-box:before {
+            border-top: none;
+        }
+
+        .index-info-box:after {
+            border-bottom: none;
+        }
+
+        .weui-grids:before {
+            border-top: none;
+        }
+
+        .classify-header:before {
+            border-top: none;
+        }
+
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .weui-cell__bd {
+            margin-left: 10px;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .info-list li {
+            padding-right: 15px;
+        }
+
+        .info-list li a {
+            display: block;
+            color: #333;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: break-word;
+        }
+
+        .index-scroll-info:before {
+            border-top: none;
+        }
+
+        .show_goods_price_list_cell:before {
+            border-top: none;
+        }
+
+        /* 本例子css -------------------------------------- */
+        .slideBox {
+            position: relative;
+            overflow: hidden;
+            /*margin: 10px auto;*/
+            max-width: 560px; /* 设置焦点图最大宽度 */
+        }
+
+        .slideBox .hd {
+            position: absolute;
+            height: 28px;
+            line-height: 28px;
+            bottom: 0;
+            left: 50%;
+            z-index: 1;
+        }
+
+        .slideBox .hd li {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            background: transparent;
+            border: 1px solid #919380;
+            text-indent: -9999px;
+            overflow: hidden;
+            margin: 0 6px;
+        }
+
+        .slideBox .hd li.on {
+            background: #fff;
+            border-color: #fff;
+        }
+
+        .slideBox .bd {
+            position: relative;
+            z-index: 0;
+        }
+
+        .slideBox .bd li {
+            position: relative;
+            text-align: center;
+        }
+
+        .slideBox .bd li img {
+            /*background: url(images/loading.gif) center center no-repeat;*/
+            vertical-align: top;
+            width: 100%; /* 图片宽度100%，达到自适应效果 */
+        }
+
+        .slideBox .bd li a {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        /* 去掉链接触摸高亮 */
+        .slideBox .bd li .tit {
+            display: block;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            text-indent: 10px;
+            height: 28px;
+            line-height: 28px;
+            /*background: url(images/focusBg.png) repeat-x;*/
+            color: #fff;
+            text-align: left;
+        }
+
+        .product_img {
+            display: block;
+            width: 54px;
+            height: 53px;
+            margin: 0 12px 0px 8px;
+        }
+
+        .dataSpan {
+            display: block;
+            text-align: center;
+            color: #000000;
+        }
+
+        #searchBar {
+            width: 75%;
+            margin: auto;
+        }
+
+        .page.searchbar .searchbar-result {
+            display: none;
+            margin-top: 0;
+            font-size: 14px
+        }
+
+        .weui-flex__item img {
+            width: 100%;
+            margin: auto;
+            display: block;
+        }
+
+        .weui-flex__item {
+            border-bottom: 3px solid #EBEAEF;
+            border-right: 3px solid #EBEAEF;
+        }
+
+        .notice_active li {
+            list-style-type: none;
+            height: 1.5rem;
+        }
+
+        .notice_active {
+            height: 1.5rem;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .notice_span {
+            padding: 3px 3px;
+            background: #EF725E;
+            color: #FFFFFF;
+            font-size: 14px;
+            height: 100%;
+            margin: 0 6px;
+            margin-left: 0;
+        }
+
+        .grey-body {
+            background: #EBEAEF;
+        }
+
+        .weui-cell_access:active {
+            background-color: #FFF;
+        }
+
+    </style>
+</head>
+
+<body class="grey-body">
+
+<div>
+    <div>
+        <div id="slideBox" class="slideBox">
+            <div class="bd">
+                <ul id="ad_list"></ul>
+            </div>
+            <div class="hd">
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/html" id="msg_list_tpl">
+    {{each list as value i}}
+    <li>
+        <a class="send-modal" href="javascript:void(0)" id="{{value.messageId}}" url="{{value.url}}"
+           userMsgId="{{value.userMessageId}}">
+            <div class="weui-cell__bd gg_more" style="width: 100%;">
+                <p style="text-overflow: ellipsis;overflow: hidden;height:18px;font-size: 14px;color: #333;width: 90%;">
+                    <span class="notice_span">通知</span>{{value.messageTitle}}
+                </p>
+            </div>
+            <div class="weui-cell__ft">
+            </div>
+        </a>
+    </li>
+    {{/each}}
+</script>
+
+
+<div class="clearfix" style="position: relative;padding: 10px 0;border-bottom: 10px solid #EBEAEF;background: #fff;">
+    <div style="float: left;width: 26%;text-align: center;border-right: 1px dashed #ddd;">
+        <a href="/page/safeDetect.html"> <img src="/src/image/Safety_testing.png" alt="" style="width: 80%"></a>
+    </div>
+    <div style="float: right;width: 73%;">
+        <div class="notice_active">
+            <ul id="msg_list"></ul>
+        </div>
+        <div id="article_list">
+        </div>
+    </div>
+    <script type="text/html" id="article_list_tp">
+        {{each dataList as value j}}
+        <li style="padding-right: 20px;list-style-type: none">
+            <a href="page/safeDetectReport.html?id={{value.articleId}}"
+               style="display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #333;font-size: 14px;">【{{value.createTime.substring(5,10)}}】{{value.title}}</a>
+        </li>
+        {{/each}}
+
+    </script>
+</div>
+
+<div class="datalist page__bd page__bd_spacing">
+    <div class="weui-flex">
+        <div class="weui-flex__item" data-type="5">
+            <img src="/src/image/01vegetables.jpg">
+        </div>
+        <div class="weui-flex__item" style="border-right:none">
+            <div class="weui-flex__item" style="border-right:none" data-type="27"><img src="/src/image/02fruit.jpg">
+            </div>
+            <div class="weui-flex__item" style="border: none" data-type="45"><img src="/src/image/03beans.jpg"></div>
+        </div>
+    </div>
+    <div class="weui-flex">
+        <div class="weui-flex__item" data-type="4"><img src="/src/image/04ganhuo.jpg"></div>
+        <div class="weui-flex__item" data-type="64"><img src="/src/image/05yanhuo.jpg"></div>
+        <div class="weui-flex__item" data-type="7"><img src="/src/image/06Oil.jpg"></div>
+        <div class="weui-flex__item" data-type="12" style="border-right:none"><img src="/src/image/07tiaoliao.jpg">
+        </div>
+    </div>
+    <div class="weui-flex">
+        <div class="weui-flex__item" data-type="6"><img src="/src/image/08meat.jpg"></div>
+        <div class="weui-flex__item" data-type="11" style="border-right:none"><img src="/src/image/09water.jpg"></div>
+    </div>
+</div>
+<div class="weui-cell classify-header" style="background: #EBEAEF;padding: 14px 15px">
+    <div class="weui-cell__hd" style="width:45%;">
+        <label class="weui-label_lt" style="color:#41BA82;float:right;font-size: 10px;">——————</label>
+    </div>
+    <div class="weui-cell__bd">
+        <label class="weui-label" style="color:#41BA82;text-align: center;font-size: 13px; "> <img
+                src="/src/image/fire.png" alt=""
+                style="position: absolute;width: 15px;margin-left: -25px;">热门推荐</label>
+    </div>
+    <div class="weui-cell__ft" style="width:45%">
+        <label class="weui-label" style="color:#41BA82;float:left;text-align: left;font-size: 10px;">——————</label>
+    </div>
+</div>
+
+
+<div id="product-list" class="page__bd page__bd_spacing" style="padding-bottom: 55px">
+</div>
+<div id="cloading" class="hide">
+    <div class="page__bd" id="loading">
+        <div class="weui-loadmore">
+            <i class="weui-loading"></i>
+            <span class="weui-loadmore__tips">正在加载...</span></div>
+    </div>
+</div>
+<script type="text/html" id="show_goods_price_list-tpl">
+    {{each goodspriceDataList as value i}}
+    <div class="weui-cell show_goods_price_list_cell" style="background: #F9F9F9;border-bottom: 1px dotted #d9d9d9;">
+        <div class="weui-cell__hd">
+            <p style="padding-left: 20px;"><label style="color: #FF715B;">¥</label><label style="color:  #FF715B;"
+                                                                                          id="retailPrice_{{value.priceId}}">{{value.retailPrice}}</label><label>/{{value.unitName}}</label>
+            </p>
+        </div>
+        <div class="weui-cell__bd">
+            <!--<p><label>&nbsp;</label></p>-->
+        </div>
+        <div class="weui-cell__ft">
+            <div class="weui-cell" style="padding-right: 0;padding-left: 0;">
+                <div class="user-number user-number-sub">
+                    <img src="/src/image/substact.png" id="sub_{{value.priceId}}"
+                         style="display: block;  width: 24px;  height: 24px;">
+                </div>
+                <input pattern="[0-9]*" class="weui-number-input"
+                       style="text-align:center;width:30px;font-size: initial;display:block;margin: 0 5px;border:1px solid #999;border-radius: 0;"
+                       value="{{value.buyPrice}}"
+                       id="edit_{{value.priceId}}"
+                       data-min="0"
+                       data-max="9999"
+                       data-step="1">
+
+                <div class="user-number user-number-plus">
+                    <img src="/src/image/add.png" id="add_{{value.priceId}}"
+                         style="display: block; width: 24px; height: 24px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    </li>
+    {{/each}}
+</script>
+<script type="text/html" id="product-list-tpl">
+    {{each dataList as value i}}
+    <li style="list-style-type:none;background: #fff;margin-bottom: 10px;">
+        <div class="weui-cell"
+             style="border-bottom: 1px solid #ddd;padding-left: 0px;padding-left: 10px;">
+            <div class="weui-cell__bd">
+                <a class="weui-cell weui-cell_access" href="/page/productInfo.html?id={{value.goodsId}}"
+                   style="padding-left: 0;padding-right:0; ">
+                    <div class="weui-cell__hd">
+                        <img src="{{value.image[0]}}" alt="" class="product_img">
+                    </div>
+                    <div class="weui-cell__bd" style="">
+                        <p style="padding-bottom: 15px;" class="goodsname"><label>{{value.goodsName}}</label></p>
+                        <p style="font-size:14px;">
+                            <label style="font-size:14px;color: #31B47A;">¥</label>
+                            <label style="font-size:14px;color: #31B47A;" id="one_retailPrice_{{value.vo_priceId}}">{{value.vo_retailPrice}}</label>起
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="weui-cell__ft" style="position: absolute;bottom: 10px;right: 15px;">
+                <div class="weui-cell" style="text-align: right; padding-right: 0px;font-size:10px;">
+                    <a href="javascript:void(0);" class="weui-btn weui-btn_mini weui-btn_default;"
+                       style="color: #fff;background: #2BC17A;border-radius: 20px;"
+                       id="goodsId_{{value.goodsId}}">选择规格</a>
+                    <div class="user-number user-number-sub">
+                        <img src="/src/image/substact.png" id="one_sub_{{value.vo_priceId}}"
+                             style="display: none;  width: 24px;  height: 24px;">
+                    </div>
+                    <input pattern="[0-9]*" class="weui-number-input"
+                           style="text-align:center;font-size: initial;width: 30px; display: none;margin: 0 5px;border: 1px solid #999;border-radius: 0;"
+                           value="{{value.vo_shoppingCartNum}}"
+                           id="one_edit_{{value.vo_priceId}}"
+                           data-min="0"
+                           data-max="9999"
+                           data-step="1">
+
+                    <div class="user-number user-number-plus">
+                        <img src="/src/image/add.png" id="one_add_{{value.vo_priceId}}"
+                             style="display: none;  width: 24px;  height: 24px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li style="list-style-type:none;">
+        <div id="show_goods_price_list_{{value.goodsId}}" class="weui-cells format-choose"
+             style="width: 100%;display:none;margin-top:-10px;margin-bottom:10px;font-size: 14px;">
+            <!--  展示规格 -->
+        </div>
+    </li>
+    {{/each}}
+</script>
+
+<!--include "./public/footer.html"-->
+
+</body>
+
+</html>

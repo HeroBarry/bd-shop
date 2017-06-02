@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>规格列表展示</title>
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/index.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./show_goods_price_list" data-main="/src/js/config.js"></script>
+
+</head>
+<body>
+<script type="text/html" id="show_goods_price_list-tpl">
+    {{each goodspriceDataList as value i}}
+        <li>                          
+            <div class="weui-cell__bd">
+                    <p><label>{{value.unitName}}</label></p>
+            </div>			
+            <div style="text-align: right; padding-right: 2px;">
+                <div class="user-number user-number-sub">
+                     <img src="/src/image/substact.png" onclick="subOnegoodsprice({{value.priceId}})">
+                </div>
+                <input pattern="[0-9]*" class="weui-number-input" style="width: 50px; display: block;" value="{{value.priceId}}" id="input_{{value.priceId}}" 
+					onchange="changeGoodsPriceNum({{value.priceId}})"
+                    data-min="0"
+                    data-max="9999"
+                    data-step="1">
+                <div class="user-number user-number-plus">
+                     <img src="/src/image/add.png" onclick="addOnegoodsprice({{value.priceId}})">
+                </div>
+            </div>
+        </li>
+    {{/each}}
+</script>
+</body>
+
+</html>

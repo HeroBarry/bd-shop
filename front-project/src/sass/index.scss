@@ -1,0 +1,178 @@
+@charset "UTF-8";
+/************************
+ * 描述：
+ * 作者：mjy
+ * 时间：2016-12-12
+************************/
+@import "basic","variable","component";
+
+.section1 {
+    background: url("/src/image/index_bg.jpg") no-repeat top center;
+    background-size: cover;
+    position: relative;
+
+    .fp-section {
+        height: 100%;
+        position: relative;
+    }
+
+    .index-arrow {
+        position: absolute;
+        left: 50%;
+        margin-left: -16px;
+        bottom: 120px;
+        -webkit-animation: arrowGo 1.5s infinite steps(10, end);
+        animation: arrowGo 1.5s infinite steps(10, end);
+
+        i {
+            color: #F5CA01;
+            font-size: 32px;
+        }
+        @-webkit-keyframes arrowGo {
+            0% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+                bottom: 180px;
+            }
+        }
+        @keyframes arrowGo {
+            0% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+                bottom: 180px;
+            }
+        }
+    }
+
+    .text1 {
+        width: 180px;
+        float: left;
+        margin-top: -250px;
+        margin-left: 30px;
+    }
+
+    .text2 {
+        width: 130px;
+        float: right;
+        margin-top: -250px;
+        margin-right: 30px;
+    }
+}
+
+.section2 {
+    background: #050507;
+
+    .fp-tableCell {
+        vertical-align: baseline;
+
+        h1 {
+            top: 0;
+            text-align: center;
+            padding-top: 30px;
+
+            img {
+                width: 100px;
+            }
+        }
+    }
+}
+
+.product-list {
+    li {
+        width: 90%;
+        margin: 0 auto;
+        height: 200px;
+        background: url("/src/image/pro_bg.png") no-repeat;
+        background-size: 100%;
+        position: relative;
+        margin-bottom: 20px;
+
+        img {
+            width: 45%;
+            padding-top: 50px;
+            padding-left: 20px;
+        }
+
+        .pro-description {
+            position: absolute;
+            top: 38px;
+            right: 30px;
+            text-align: right;
+            width: 55%;
+
+            h2 {
+                color: #fff;
+                font-size: 16px;
+                padding-bottom: 0.5rem;
+            }
+
+            p {
+                color: #fff;
+                font-size: 12px;
+                height: 38px;
+                padding-left: 36px;
+                overflow: hidden;
+                line-height: 18px;
+                text-align: right;
+            }
+
+            .price {
+                float: right;
+                color: #b12929;
+                font-size: 1.2rem;
+                display: inline-block;
+                float: right;
+                padding: 1px 8px;
+                margin-top: 5px;
+
+                span {
+                    color: #b12929;
+                    font-size: 0.85rem;
+                    padding-right: 2px;
+                }
+            }
+        }
+        @media screen and (max-width: 320px) {
+            .pro-description {
+                top: 28px;
+                right: 20px;
+
+                h2 {
+                    font-size: 14px;
+                }
+
+                .price {
+                    margin-top: 0;
+                }
+            }
+
+            img {
+                padding-top: 42px;
+            }
+        }
+    }
+}
+
+.list-page {
+    background: #050507;
+    padding-top: 50px;
+}
+
+.index-footer {
+    background: #F5CA01;
+    text-align: center;
+    font-size: 0.5rem;
+    color: #333;
+    padding: 10px 0 70px;
+    margin-top: 20px;
+
+    p {
+        line-height: 1rem;
+    }
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <title>推送消息详情</title>
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/manage.css">
+    <!--<link rel="stylesheet" href="/src/font/message_add.css">-->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./manage_message_push"
+            data-main="/src/js/config.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/lib/html5shiv.min.js"></script>
+    <script src="/lib/respond.min.js"></script>
+
+    <![endif]-->
+</head>
+
+<body>
+<!--include "../public/manage_sidebar.html"-->
+<!--include "../public/manage_header.html"-->
+<div class="container-wrap">
+    <div class="bread-nav clearfix p-l-lg">
+        <ol>
+            <li class="fl active text-333 text-basic"><a href="javascript:void(0);">客户中心&nbsp;&gt;&nbsp;</a></li>
+            <li class="fl active text-333 text-basic"><a href="javascript:void(0);">消息推送&nbsp;&gt;&nbsp;</a>
+            </li>
+            <li class="fl active text-333 text-basic"><a href="javascript:void(0);">立即推送</a>
+            </li>
+        </ol>
+    </div>
+    <div id="div-box" class="p-l-lg m-t-xxl">
+
+    </div>
+    <div class="btn-group" style="position: absolute;top:90px;right:0;">
+        <input type="submit" id="submit-btn" value="立即推送" class="btn btn-primary m-r-lg text-basic">
+        <a href="javascript:void(0)" class="btn btn-default m-r-lg text-basic"
+           onclick="window.history.go(-1);">返回</a>
+    </div>
+    <script id="div-box-tpl" type="text/html">
+        <table border="1" class="table table-bordered">
+            <tr>
+                <td>
+                    消息推送名称
+                </td>
+                <td>
+                    {{obj.messageTitle}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    消息描述
+                </td>
+                <td>
+                    {{obj.messageContext}}
+                </td>
+            </tr>
+        </table>
+    </script>
+    <div class="p-l-lg">
+        给以下用户推送
+        <div class="row">
+            <div class="m-r-lg m-l-lg">
+                <div class="table-responsive">
+                    <table class="table table-hover m-t" width="100%" style="border: 1px;">
+                        <thead>
+                        <tr>
+                            <th class="font-normal text-basic" width="5%">编号</th>
+                            <th class="font-normal text-basic" width="10%">会员所属地址</th>
+                            <th class="font-normal text-basic" width="15%">企业名称</th>
+                            <th class="font-normal text-basic" width="10%">企业会员手机号</th>
+                            <th class="font-normal text-basic" width="10%">推送时间</th>
+                            <th class="font-normal text-basic" width="10%">推送状态</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-666" id="table-list-content">
+
+                        </tbody>
+                        <script id="table-list-tpl" type="text/html">
+                            {{each dataList as value i}}
+                            <tr>
+                                <td><span>{{i+1}}</span></td>
+                                <td><span class="inline-block text-ellipsis text-basic">{{value.nickname}}</span>
+                                </td>
+                                <td><span class="inline-block text-ellipsis text-basic">{{value.province}}&nbsp;{{value.city}}&nbsp;{{value.country}}</span>
+                                </td>
+                                <td><span class="inline-block text-ellipsis text-basic">{{value.companyName}}</span>
+                                </td>
+                                <td><span class="inline-block text-ellipsis text-basic">{{value.phone}}</span>
+                                </td>
+                                <td>
+                                    <span class="inline-block text-ellipsis text-basic">{{value.pushTime}}</span>
+                                </td>
+                                <td>
+                                    <span class="inline-block text-ellipsis text-basic">{{if value.push==1}}等待推送{{else}}已推送{{/if}}</span>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </script>
+                    </table>
+                    <div id="cloading" class="hide">
+                        <div id="loadmore"></div>
+                    </div>
+                </div>
+                <div class="pages fr">
+                    <ul id="pagination" class="pagination-container"></ul>
+                    <div class="page-sum text-right text-999 text-basic">当前页面总数：<span class="text-333"
+                                                                                      id="page-sum">0</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

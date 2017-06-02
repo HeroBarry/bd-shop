@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>订单详情</title>
+    <!--<link rel="stylesheet" href="/src/font/iconfont.css">-->
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <!-- <link rel="stylesheet" href="/css/style.css">-->
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./order_detail"
+            data-main="/src/js/config.js"></script>
+    <style>
+        .order-date:before{
+            right: 15px;
+        }
+        .address-bar:before{
+            right: 15px;
+        }
+        .weui-cell:before{
+            right: 15px;
+        }
+    </style>
+
+</head>
+
+<body class="grey-body">
+<div class="weui-cells " style="background-color: #FFFFFF;margin-top: 0;padding-top: 10px;" id="order-base">
+
+</div>
+<script type="text/html" id="order-base-tpl">
+    <label class="weui-cell weui-check__label">
+        <div class="weui-cell__bd">
+            <p style="color: #838383;float: left">订单号：{{obj.orderNumber}}</p>
+        </div>
+        <div class="weui-cell__ft">
+            <p style="color: #333;float: right">{{if obj.payState==1}}未付款{{else if obj.payState==2}}已付款{{/if}}</p>
+        </div>
+    </label>
+    <label class="weui-cell weui-check__label order-date">
+        <div class="weui-cell__bd">
+            <p style="color: #07141e;float: left">下单时间：{{obj.createTime}}</p>
+            <p style="float:right">
+                <span style="color: #07141e">订单金额：</span>
+                <span style="color: #FEA395;">¥{{obj.totalAmount/100}}</span>
+            </p>
+            <br/>
+
+            <p style="color: #07141e;float: left;color: #838383">{{if obj.logisticsState==0}}未配送
+                {{else if obj.logisticsState==1}}等待配送{{else if obj.logisticsState==2}}已配送
+                {{else if obj.logisticsState==3}}已确认收货{{/if}}</p>
+        </div>
+    </label>
+    <label class="weui-label" style="background:#f0f0f0;width: 100%;height: 10px;margin-bottom: 0px;"> &nbsp;</label>
+</script>
+<div class="weui-cells " style="background-color: #FFFFFF;margin-top: 0;">
+    <label class="weui-cell weui-check__label">
+        <div class="weui-cell__bd">
+            <p style="color: #07141e;float: left">配送地址</p>
+        </div>
+    </label>
+    <label class="weui-cell weui-check__label address-bar">
+        <div class="weui-cell__bd" id="order-address">
+
+        </div>
+        <script type="text/html" id="order-address-tpl">
+            <p style="color: #07141e;float: left">
+                {{obj.receive.contact}}&nbsp;{{obj.receive.tel}}<br>
+                {{obj.receive.receiveProvince }}&nbsp; {{obj.receive.receiveCity}}&nbsp;
+                {{obj.receive.receiveCounty}}&nbsp; {{obj.receive.receiveAddress}}</p>
+        </script>
+    </label>
+</div>
+<label class="weui-label" style="background:#f0f0f0;width: 100%;height: 10px;margin-bottom: 0px;"> &nbsp;</label>
+<div class="weui-cells " style="background-color: #FFFFFF;margin-top: 0;">
+    <label class="weui-cell weui-check__label">
+        <div class="weui-cell__bd">
+            <p style="color: #07141e;float: left">付款方式</p>
+        </div>
+    </label>
+    <label class="weui-cell weui-check__label">
+        <div class="weui-cell__bd" id="order-payment">
+
+        </div>
+        <script type="text/html" id="order-payment-tpl">
+            <p style="color: #07141e;float: left">
+                {{obj.payment.name}}</p>
+        </script>
+    </label>
+</div>
+<label class="weui-label" style="background:#f0f0f0;width: 100%;height: 10px;margin-bottom: 0px;"> &nbsp;</label>
+<div class="weui-cells " style="background-color: #FFFFFF;margin-top: 0;">
+    <label class="weui-cell weui-check__label">
+        <div class="weui-cell__bd">
+            <p style="color: #07141e;float: left">所选购商品</p>
+        </div>
+    </label>
+
+    <div class="weui-cell__bd" id="order-goods">
+
+    </div>
+    <script type="text/html" id="order-goods-tpl">
+        {{each obj.orderDetailsList as value i}}
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p style="color: #07141e;float: left">
+                    {{value.goodsName}}（{{value.unitName}}）X{{value.num}}
+                </p>
+                <p style="color: #07141e;float: right">¥{{value.detailsAmount/100}}</p>
+            </div>
+        </label>
+        {{/each}}
+    </script>
+    <label class="weui-cell weui-check__label">
+        <div class="weui-cell__bd" id="order-amount">
+        </div>
+        <script type="text/html" id="order-amount-tpl">
+            <p style="color: #07141e;">
+                <span style="color: #07141e">总计：</span>
+                <span style="float: right;">¥{{obj.totalAmount/100}}</span>
+            </p>
+        </script>
+    </label>
+    <label class="weui-cell weui-check__label">
+        <div class="weui-cell__bd" id="order-amount2">
+
+        </div>
+        <script type="text/html" id="order-amount2-tpl">
+            <p style="color: #07141e;float: left">
+                <span>优惠：</span>
+                <span>¥{{obj.discountAmount/100}}</span>
+            </p>
+
+            <p style="color: #07141e;float: right">
+                <span>实付：</span>
+                <span style="color: #FEA395">¥{{obj.paidAmount/100}}</span>
+            </p>
+        </script>
+    </label>
+    <label class="weui-label" style="background:#f0f0f0;width: 100%;height: 10px;margin-bottom: 0px;"> &nbsp;</label>
+    <label class="weui-cell weui-check__label">
+        <div class="weui-cell__bd" style="float: right;" id="order-commont">
+        </div>
+        <script type="text/html" id="order-commont-tpl">
+            <p style="color: #07141e;float: left">
+                <span style="color: #07141e">备注：</span>
+                <span>{{obj.comment}}</span>
+            </p>
+        </script>
+    </label>
+    <label class="weui-cell weui-check__label">
+        <div class="weui-cell__bd" style="padding-bottom: 20px;" id="order-invoiceTag">
+        </div>
+        <script type="text/html" id="order-invoiceTag-tpl">
+            <p style="color: #07141e;float: left">
+                <span style="color: #07141e">是否开发票：</span>
+                <span>{{if obj.invoiceTag==1}}是{{else if obj.invoiceTag==0}}否{{/if}}</span>
+            </p>
+        </script>
+    </label>
+</div>
+<div class="weui-cell__bd" style="padding-bottom: 40px;">
+    <a href="/page/order_list.html" id="backBtn" class="weui-btn" style="background-color: #2CC17B; width: 90%;">返回</a>
+</div>
+</body>
+</html>

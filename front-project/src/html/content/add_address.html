@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>收货地址</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./add_address" data-main="/src/js/config.js"></script>
+
+</head>
+
+<body>
+    <form class="weui-cells weui-cells_form add-address-form" id="add-address-box">
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">收货人：</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" id="userName" name="contact" placeholder="姓名">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">联系方式：</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="tel" id="phone" name="tel" placeholder="收货人手机">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label for="" class="weui-label">所在地区：</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input"  type="text" id='city-picker'>
+            </div>
+            <input type="hidden" id="receiveProvince" name="receiveProvince">
+            <input type="hidden" id="receiveCity"      name="receiveCity">
+            <input type="hidden" id="receiveCounty"   name="receiveCounty">
+        </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">详细地址：</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" id="address" name="receiveAddress" placeholder="楼道，楼牌号等">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells btn-box">
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" id="save-btn" style="font-size:0.75rem;padding:0 2em;background: #2BC17A;">保存</a>
+        </div>
+        <script type="text/html" id="add-address-tpl">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">收货人：</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" id="userName" value="{{contact}}" name="contact" placeholder="姓名">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">联系方式：</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="tel" id="phone" value="{{tel}}" name="tel" placeholder="收货人手机">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">所在地区：</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" id='city-picker'  value="{{receiveProvince}} {{receiveCity}} {{receiveCounty}}">
+                </div>
+                <input type="hidden" id="receiveProvince" name="receiveProvince">
+                <input type="hidden" id="receiveCity"      name="receiveCity">
+                <input type="hidden" id="receiveCounty"   name="receiveCounty">
+            </div>
+            <div class="weui-cells">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">详细地址：</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" id="address" value="{{receiveAddress}}" name="receiveAddress" placeholder="楼道，楼牌号等">
+                    </div>
+                </div>
+            </div>
+            <div class="weui-cells btn-box">
+                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" id="save-btn" style="font-size:0.75rem;padding:0 2em;background: #2BC17A;">保存</a>
+            </div>
+        </script>
+    </form>
+</body>
+
+</html>

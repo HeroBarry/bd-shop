@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <title>订单详情</title>
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/manage.css">
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./manage_order_detail" data-main="/src/js/config.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/lib/html5shiv.min.js"></script>
+    <script src="/lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<!--include "../public/manage_sidebar.html"-->
+<!--include "../public/manage_header.html"-->
+<div class="container-wrap">
+    <div class="bread-nav clearfix p-l-lg">
+        <ol class="fl">
+            <li class="fl text-333 text-basic"><a href="javascript:void(0);" onclick="window.history.go(-1);">商品订单&nbsp;&gt;&nbsp;</a>
+            </li>
+            <li class="fl active text-333 text-basic"><a href="javascript:void(0);">订单详情</a></li>
+        </ol>
+        <div class="fr">
+            <a href="javascript:void(0);" class="btn btn-default m-r-lg text-basic"
+               onclick="window.history.go(-1);">返回</a>
+        </div>
+    </div>
+    <div class="row" style="margin-left: 0;margin-right: 15px;padding-left: 20px;">
+        <h2 class="b-b text-md p-b-lg p-t-lg">订单信息</h2>
+
+        <div id="orderinfo">
+
+        </div>
+        <script type="text/html" id="orderinfo-tpl">
+            <table border="1"  class="table table-bordered">
+                <tr>
+                    <td>订单号</td>
+                    <td>{{obj.orderNumber}}</td>
+                    <td>
+                        下单时间
+                    </td>
+                    <td>{{obj.createTime}}</td>
+                </tr>
+                <tr>
+                    <td>会员手机</td>
+                    <td>{{obj.user.phone}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </script>
+
+        <h2 class="b-b text-md p-b-lg p-t-lg">支付状况</h2>
+
+        <div id="payInfo">
+
+        </div>
+        <script type="text/html" id="payInfo-tpl">
+            <table border="1" class="table table-bordered">
+                <tr>
+                    <td>订单总金额</td>
+                    <td>{{obj.totalAmount/100}}</td>
+                    <td>
+                        付款方式
+                    </td>
+                    <td>{{obj.payment.name}}</td>
+                </tr>
+                <tr>
+                    <td>支付状态</td>
+                    <td>{{if obj.payState==1}}未付款 {{else if obj.payState==2}}已付款{{/if}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </script>
+
+        <h2 class="b-b text-md p-b-lg p-t-lg">所选购商品</h2>
+
+        <div class="table-responsive row" style="margin-left: 0;margin-right: 0;">
+            <table class="table table-hover table-bordered m-t" style="">
+                <thead>
+                <tr>
+                    <th class="font-normal text-basic" width="5%">序号</th>
+                    <th class="font-normal text-basic" width="10%">商品名称</th>
+                    <th class="font-normal text-basic" width="10%">规格/单位</th>
+                    <th class="font-normal text-basic" width="5%">商品价格（元）</th>
+                    <th class="font-normal text-basic" width="5%">购买数量（个）</th>
+                    <th class="font-normal text-basic" width="5%">总价（元）</th>
+                </tr>
+                </thead>
+                <tbody class="text-666" id="table-list-content">
+
+                </tbody>
+                <script type="text/html" id="table-list-tpl">
+                    {{if obj.orderDetailsList.length==0 }}
+                    <tr>
+                        <td><span>无</span></td>
+                        <td><span class="inline-block text-ellipsis text-basic">无</span></td>
+                        <td><span class="inline-block text-ellipsis text-basic">无</span></td>
+                        <td><span class="inline-block text-ellipsis text-basic">无</span></td>
+                        <td><span class="inline-block text-ellipsis text-basic">无</span></td>
+                    </tr>
+                    {{else}} {{each obj.orderDetailsList as value i}}
+                    <tr>
+                        <td><span>{{i+1}}</span></td>
+                        <td><span class="inline-block text-ellipsis text-basic">{{value.goodsName}}</span></td>
+                        <td><span class="inline-block text-ellipsis text-basic">{{value.unitName}}</span></td>
+                        <td><span class="inline-block text-ellipsis text-basic">{{value.unitPrice/100}}</span></td>
+                        <td><span class="inline-block text-ellipsis text-basic">{{value.num}}</span></td>
+                        <td><span class="inline-block text-ellipsis text-basic">{{value.detailsAmount/100}}</span></td>
+                    </tr>
+                    {{/each}} {{/if}}
+                </script>
+            </table>
+        </div>
+
+        <h2 class="b-b text-md p-b-lg p-t-lg">配送信息</h2>
+
+        <div id="logisticsInfo">
+
+        </div>
+        <script type="text/html" id="logisticsInfo-tpl">
+            <table border="1" class="table table-hover table-bordered m-t">
+                <tr>
+                    <td>送货地址</td>
+                    <td>{{obj.receive.receiveProvince }}&nbsp; {{obj.receive.receiveCity}}&nbsp;
+                        {{obj.receive.receiveCounty}}&nbsp; {{obj.receive.receiveAddress}}
+                    </td>
+                    <td>
+                        联系人姓名
+                    </td>
+                    <td>{{obj.receive.contact}}</td>
+                </tr>
+                <tr>
+                    <td>联系人电话</td>
+                    <td>{{obj.receive.tel}}</td>
+                    <td>配送时间</td>
+                    <td>{{obj.sendTime}}</td>
+                </tr>
+                <tr>
+                    <td>配送状态</td>
+                    <td>{{if obj.logisticsState==0}}未配送 {{else if obj.logisticsState==1}}等待配送{{else if obj.logisticsState==2}}已配送{{else if obj.logisticsState==3}}已确认收货{{/if}}
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </script>
+
+        <h2 class="b-b text-md p-b-lg p-t-lg">付款凭证</h2>
+
+        <div id="payCertify" class="m-t">
+
+        </div>
+        <script type="text/html" id="payCertify-tpl">
+            <div>
+                <img src={{obj.orderCertify.imageUrl}} />
+            </div>
+        </script>
+    </div>
+</div>
+</body>
+</html>

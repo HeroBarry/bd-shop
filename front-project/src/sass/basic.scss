@@ -1,0 +1,223 @@
+@charset "utf-8";
+/* CSS Document */
+@import "variable";
+
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+a,
+address,
+article,
+aside,
+audio,
+body,
+body,
+canvas,
+dd,
+del,
+div,
+dl,
+dt,
+em,
+embed,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+html,
+html,
+i,
+img,
+input,
+label,
+li,
+menu,
+nav,
+object,
+ol,
+p,
+q,
+ruby,
+s,
+section,
+span,
+strong,
+table,
+tbody,
+td,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    font-family: "微软雅黑", 'Microsoft Yahei', 'Hiragino Sans GB', tahoma, arial, "宋体";
+}
+
+body {
+    font-family: "微软雅黑", 'Microsoft Yahei', 'Hiragino Sans GB', tahoma, arial, "宋体";
+    margin: 0 auto;
+    padding: 0;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 25px;
+}
+
+a {
+    color: #221815;
+    cursor: pointer;
+    text-decoration: none;
+    /* for FF Chrome */
+    outline: none;
+    blr: expression(this.onFocus=this.blur());
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus {
+    outline: 0;
+}
+
+a,
+area {
+    blr: expression(this.onFocus=this.blur());
+}
+/* for IE */
+:focus {
+    -moz-outline-style: none;
+}
+/* for Firefox */
+img {
+    -ms-interpolation-mode: bicubic;
+    border: 0;
+    display: block;
+}
+
+li,
+ul,
+ul li {
+    list-style-type: none;
+}
+
+button,
+input,
+select,
+textarea {
+    font-size: 100%;
+}
+
+button {
+    background: none;
+    border: 0 none;
+    cursor: pointer;
+}
+// input,
+// label {
+//     line-height: 18px;
+//     vertical-align: middle;
+//     padding: 2px 0;
+// }
+
+input:focus {
+    border-color: $theme-color;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+label {
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+select {
+    line-height: 18px;
+    padding: 2px 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table tr,
+table tr td {
+    border: none 0;
+}
+
+table tr td,
+table tr th {
+    empty-cells: show;
+}
+
+button,
+input,
+select,
+textarea {
+    outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: 500;
+    color: #333;
+}
+
+.iconfont {
+    font-size: 25px;
+}
+
+.hide {
+    display: none;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.block {
+    display: block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+i {
+    vertical-align: middle;
+}

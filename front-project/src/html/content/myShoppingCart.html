@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>购物车详情</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./myShoppingCart" data-main="/src/js/config.js"></script>
+	
+    <style type="text/css">
+        body {
+
+            margin: 0 auto;
+            min-width: 320px;
+            max-width: 540px;
+            background: #fff;
+            font-size: 14px;
+            font-family: -apple-system,Helvetica,sans-serif;
+            line-height: 1.5;
+            color: #666;
+            -webkit-text-size-adjust: 100%!important
+        }
+
+        .mask {
+            position: absolute;
+            top: 0px;
+            filter: alpha(opacity=60);
+            background-color: #777;
+            z-index: 500;
+            left: 0px;
+            opacity: 0.5;
+            -moz-opacity: 0.5;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .format-choose:before {
+            border-top: none;
+        }
+
+        .format-choose .weui-cell {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        #settle_accounts:after {
+            border-radius: 0;
+        }
+
+        .format-choose .weui-number-input {
+            margin: 0 5px;
+        }
+
+        .searchbar-result:after {
+            border-bottom: none;
+        }
+
+        #show_goods_list:after {
+            border-bottom: none;
+        }
+
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .weui-actionsheet__menu .weui-actionsheet__cell:before {
+            left: 15px;
+            right: 15px;
+        }
+
+        #showOrhideclearmyshoppingcart div.clearfix {
+            border-bottom: 1px solid #eee;
+        }
+
+        .weui-tabbar {
+            height: 49px;
+            position: fixed;
+            z-index: 900;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            max-width: 540px
+        }
+        .search_panel_title {
+            height: 40px;
+            line-height: 40px;
+            padding: 0 10px;
+            position: relative;
+            font-size: 11px;
+            background:#f2f2f7;
+        }
+        .search_panel_title .title_btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 40px;
+            padding: 0 10px;
+            line-height: 40px;
+            font-size: 16px;
+            color: #2BC17A;
+        }
+        .search_panel_title:after{
+            content: "";
+            height: 0;
+            display: block;
+            border-bottom: 1px solid #CCC;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        .fixBar {
+            z-index: 100;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 50px;
+            background: hsla(0,0%,100%,.95);
+            color: #333;
+            font-size: 14px
+        }
+        .fixBar:before {
+            content: "";
+            height: 0;
+            display: block;
+            border-bottom: 1px solid #ddd;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0
+        }
+        .text .icon_select {
+            width: 41px;
+            padding-left: 25px;
+            font-size: 13px;
+            text-align: center;
+            height: 3em;
+            line-height: 3em;
+            font-style: normal;
+            color: #333;
+        }
+        .fixBar .btns {
+            position: absolute;
+            right: 10px;
+            top: 12px
+        }
+
+        .fixBar .btns a {
+            display: inline-block;
+            margin-left: 5px;
+            width: 69px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color: #fff;
+            font-size: 12px;
+            background: #666;
+            border-radius: 2px
+        }
+        .fixBar .btns .btn_3,.fixBar .btns_share .btn_3 {
+            background: #f19325;
+            color: #fff
+        }
+        .text .icon_select:after {
+            top: 10px;
+        }
+        .icon_select:after {
+            left: 0;
+            content: "\20";
+            width: 20px;
+            height: 20px;
+            margin-left: 4px;
+        }
+        .icon_select,.icon_select:after {
+            display: block;
+            position: absolute;
+            top: 0
+        }
+        .icon_select:after,.shopcart_promotion_main .icon_select:after {
+            background: url(/src/image/un-choose.png);
+            background-size: 20px 20px
+        }
+        .shopping_isbuy_img{
+            display: block;  width: 20px;  height: 20px;
+
+        }
+        .selected .icon_select:after{
+            background: url(/src/image/choose.png);
+            background-size: 20px 20px
+
+        }
+    </style>
+</head>
+<body ontouchstart>
+<div class="weui-actionsheet__cell" style="background-color:#FFF;display:none" id="noshoppingCartInfo">
+    <div style="text-align:center;">
+        <img src="/src/image/noshoppingcartitem.png" alt="" style="display: inline-block;width: 125px;margin: 60px 0 30px;">
+    </div>
+    <div style="padding-bottom: 36px;">
+        <label>您的购物车没有商品,快去购买吧！</label>
+    </div>
+    <div style="padding: 0 15px;">
+        <a href="/page/productList.html" class="weui-btn weui-btn_primary "
+           style="width:100%;background-color:#2CC27B;">去购买</a>
+    </div>
+</div>
+<div class="page cart_body">
+    <div class="page__hd">
+        <div class="search_panel_title">
+            <div class="text"> <i id="shopping_isbuy_allOrNotall" class="icon_select" ptag="7014.3.1">全选</i></div>
+            <div class="title_btn" style="display: none">编辑</div> <div class="title_btn">清空购物车</div></div>
+    </div>
+    <div class="page__bd">
+        <div class="weui-tab">
+            <div class="weui-tab__panel">
+                <div id="dialogDetail" style="overflow-y: auto">
+                    <ul id="show_shoppingCartVO">
+                        <!--展示购物车详情  -->
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+</div>
+<div class="weui-tabbar cart_footer">
+    <a href="javascript:void(0);" class="weui-tabbar__item weui-bar__item_on"  id="shoppingCartDetail"
+       style="background: #fff;position: relative;text-align: left;border-top: 1px solid #ddd;">
+        <p style="position: absolute;left: 80px;top: 16px;font-size:18px;color:#2CC27B;">¥
+            <label
+                    id="totalNumber" style="font-weight: normal;">0.00</label>
+        </p>
+        <div style="position: absolute;top: 2px;">
+            <div style="position: relative;margin-left:15px;background: #FF715B; width: 45px;height: 45px;border-radius: 50%;text-align: center">
+                <img src="/src/image/shop.png"
+                     style="width: 25px;height: 25px;margin-top: 12px;display: inline-block;"/>
+                <span class="weui-badge"
+                      style="position: absolute;top: 0.5em;left:26px;background: #fff;color: #FF715B;font-size: xx-small;padding: .04em .3em;"
+                      id="totalCategory">0</span>
+            </div>
+        </div>
+    </a>
+    <a href="/page/order_submit.html" class="weui-btn_primary "
+       style="height:50px;background-color:#CCCCCC;color:#FFF;font-size:14px;border-radius: 0;font-size: 18px;padding-left: 30px;padding-right: 30px;line-height: 3.1;"
+       id="settle_accounts">结算</a>
+    <div class="fixBar" name="checkgroup" attr-tag="checkMain" id="checkAllBtn" style="display: none">
+      <!--  <i id="shopping_isbuy_allOrNotall" class="icon_select" ptag="7014.3.1">全选</i>-->
+        <div class="btns" id="operateDiv">
+            <a href="javascript:void (0);" class="btn_2" id="addFavor" >移至收藏</a>
+            <a href="javascript:void (0);" class="btn_3" id="deleteBtn" >删除</a>
+        </div>
+    </div>
+    <div>
+
+    </div>
+</div>
+
+<script type="text/html" id="show_shoppingCartVO-tpl">
+    {{each shoppingCartVODataList as value i}}
+    <div class="weui-actionsheet__cell"   id="div_{{value.priceId}}">
+        <li  style="overflow: hidden" class="clearfix" rid="{{value.priceId}}">
+            <div class="weui-cell touchModel" style="transform: translateX(0px);">
+                <div class="weui-cell__hd" style="width:20px">
+                    <img class="shopping_isbuy_img" src="" alt="" style="display: block;  width: 20px;  height: 20px;"
+                         id="shopping_isbuy_{{value.priceId}}">
+                </div>
+                <div class="weui-cell__bd">
+                    <a class="weui-cell weui-cell_access" style="padding-right: 0;">
+                        <div class="weui-cell__hd" style="margin-right: 10px;">
+                            <img src="{{value.image[0]}}" alt="" style="display: block;  width: 54px;  height: 54px;">
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p style="font-size:16px;text-align: left;margin-top: -5px;margin-bottom: 10px;"><label>{{value.goodsName}}</label></p>
+                            <p style="font-size:14px;text-align: left;"><label style="font-size:14px;color:  #FF715B;">¥</label><label style="font-size:14px;color:  #FF715B;" id="shopping_retailPrice_{{value.priceId}}">{{value.retailPrice}}</label>/{{value.uniteName}}
+                            </p>
+                        </div>
+                    </a>
+                </div>
+                <div class="weui-cell__ft edit" style="position: absolute;right: 15px;bottom: 10px;">
+                    <div class="weui-cell"
+                         style="text-align: right; padding-right: 0px;font-size:10px;">
+                        <div class="user-number user-number-sub">
+                            <img src="/src/image/substact.png"
+                                 id="shopping_sub_{{value.priceId}}"
+                                 style="display: block;  width: 24px;  height: 24px;">
+                        </div>
+                        <input pattern="[0-9]*" class="weui-number-input"
+                               style="text-align:center;width: 30px; display: block;margin: 0 5px;font-size: initial;border:1px solid #999;border-radius: 0;"
+                               value="{{value.quantity}}"
+                               id="shopping_edit_{{value.priceId}}"
+
+                               data-min="0"
+                               data-max="9999"
+                               data-step="1">
+
+                        <div class="user-number user-number-plus">
+                            <img src="/src/image/add.png" id="shopping_add_{{value.priceId}}"
+                                 style="display: block;  width: 24px;  height: 24px;">
+                        </div>
+                    </div>
+                </div>
+				<div class="weui-cell__ft delete" style="transform: translateX(90px)" rid="{{value.priceId}}">
+					<i class="iconfont icon-delete" rid="{{value.priceId}}" style="color: #FF715B;"></i>
+				</div>
+            </div>
+        </li>
+    </div>
+    {{/each}}
+</script>
+
+</body>
+</html>

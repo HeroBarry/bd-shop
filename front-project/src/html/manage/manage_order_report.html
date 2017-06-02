@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <title>订单统计</title>
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/manage.css">
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./manage_order_report"
+            data-main="/src/js/config.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/lib/html5shiv.min.js"></script>
+    <script src="/lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<!--include "../public/manage_sidebar.html"-->
+<!--include "../public/manage_header.html"-->
+<div class="container-wrap">
+    <div class="bread-nav clearfix p-l-lg">
+        <ol class="fl">
+            <li class="fl active text-333 text-basic"><a href="javascript:void(0);">订单统计</a></li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="m-r-lg m-l-lg">
+            <div class="table-responsive">
+                <div>
+                     <div id="container" style="height:200px;float: left;width: 50%"></div>
+                     <div id="container2" style="height: 200px;float: right;width: 50%"></div>
+                </div>
+                <table class="table table-hover m-t" width="100%" style="..." border="1">
+                    <thead>
+                    <tr>
+                        <th class="font-normal text-basic" width="5%">编号</th>
+                        <th class="font-normal text-basic" width="10%">订单号</th>
+                        <th class="font-normal text-basic" width="7%">下单时间</th>
+                        <th class="font-normal text-basic" width="7%">订单金额</th>
+                        <th class="font-normal text-basic" width="10%">会员手机</th>
+                        <th class="font-normal text-basic" width="10%">是否开发票</th>
+                        <th class="font-normal text-basic" width="7%">付款方式</th>
+                        <th class="font-normal text-basic" width="7%">支付状况</th>
+                        <th class="font-normal text-basic" width="7%">配送状态</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-666" id="table-list-content"></tbody>
+                    <script id="table-list-tpl" type="text/html">
+                        {{each dataList as value i}}
+                        <tr>
+                            <td><span>{{i+1}}</span></td>
+                            <td><span class="inline-block text-ellipsis text-basic">{{value.orderNumber}}</span></td>
+                            <td><span class="inline-block text-ellipsis text-basic">{{value.createTime}}</span></td>
+                            <td><span class="inline-block text-ellipsis text-basic">{{value.totalAmount/100}}</span></td>
+                            <td><span class="inline-block text-ellipsis text-basic">{{value.user.phone}}</span></td>
+                            <td><span class="inline-block text-ellipsis text-basic">{{if value.invoiceTag==0}}否 {{else if value.invoiceTag==1}}是{{/if}}</span>
+                            </td>
+                            <td><span class="inline-block text-ellipsis text-basic">{{value.payment.name}}</span></td>
+                            <td><span class="inline-block text-ellipsis text-basic">{{if value.payState==1}}未付款 {{else if value.payState==2}}已付款{{/if}}</span>
+                            </td>
+                            <td><span class="inline-block text-ellipsis text-basic">{{if value.logisticsState==0}}未配送 {{else if value.logisticsState==1}}等待配送{{else if value.logisticsState==2}}已配送{{else if value.logisticsState==3}}已确认收货{{/if}}</span>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </script>
+                </table>
+                <div id="cloading" class="hide">
+                    <div id="loadmore"></div>
+                </div>
+            </div>
+            <div class="pages fr">
+                <ul id="pagination" class="pagination-container"></ul>
+                <div class="page-sum text-right text-999 text-basic">当前页面总数：<span class="text-333"
+                                                                                  id="page-sum">0</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

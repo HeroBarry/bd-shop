@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="Expires" CONTENT="0">
+    <meta http-equiv="Cache-Control" CONTENT="no-cache">
+    <meta http-equiv="Pragma" CONTENT="no-cache">
+    <title>提交订单</title>
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <link rel="stylesheet" href="/src/libs/bootstrap-datetimepicker.min.css">
+    <link href="/src/libs/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/src/libs/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/src/libs/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="/src/libs/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./order_submit"
+            data-main="/src/js/config.js"></script>
+    <style>
+        body {
+            line-height: normal;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .address-choose-bar:before {
+            left: 15px;
+            right: 15px;
+        }
+
+        .address-choose-bar {
+            margin-top: 0;
+        }
+
+        .pay-method-label:before {
+            right: 15px;
+        }
+
+        .goods-bought-list:before {
+            border-top: none;
+        }
+
+        .goods-bought-box:before {
+            top: 40px;
+            left: 15px;
+            right: 15px;
+        }
+
+        .goods-bought-box:after {
+            left: 15px;
+            right: 15px;
+        }
+
+        .infact-pay:before {
+            right: 15px;
+        }
+
+        .remarks-detail:before {
+            top: 36px;
+            left: 15px;
+            right: 15px;
+        }
+
+        .datetimepicker-days {
+            width: 100%
+        }
+
+        .datetimepicker-inline {
+            width: 100%
+        }
+
+        .table-condensed {
+            width: 100%
+        }
+
+        a:focus, a:hover {
+            text-decoration: none;
+        }
+
+        a:focus p, a:hover p {
+            color: #333;
+        }
+    </style>
+</head>
+<body class="grey-body">
+<div id="dialogDetail" class="modal fade">
+    <div id="datetimepicker" style="background: white;height: 100%;width: 100%;float: left;">
+    </div>
+</div>
+<form id="order-submit-box">
+
+    <div style="background-color: #FFFFFF; margin-top: 0px;">
+        <div style="margin-top:20px;margin-left: 15px;">
+            <p style="color: #07141e;font-size: 16px;">配送地址</p>
+        </div>
+        <a href="choice_address.html">
+            <div id="order-address">
+            </div>
+        </a>
+        <script type="text/html" id="order-address-tpl">
+
+
+            <div class="weui-cells address-choose-bar">
+                <a class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd" style="height:40px ">
+                        {{if obj!=null}}
+                        <input type="hidden" name="receive.receiveId" value="{{obj.receiveId}}">
+                        <p><span style="color: #333;float: left">{{obj.contact}}&nbsp;{{obj.tel}}</span></p>
+                        <p style="color: #333;float: left;width: 100%;">{{obj.receiveProvince }}&nbsp;
+                            {{obj.receiveCity}}&nbsp;{{obj.receiveCounty}}&nbsp; {{obj.receiveAddress}}</p>
+                        {{/if}}
+                        {{if obj ==null}}
+                        <p><span style="color:#FE7E6B;">暂无配送地址,请添加</span></p>
+                        {{/if}}
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>
+            </div>
+
+            <!--<div style="padding-left: 0px;border-top: 1px solid #ddd;margin-top: 10px;margin-left: 15px;margin-right:15px;padding-top: 10px;color: #666;text-align: left;">-->
+            <!---->
+            <!--</div>-->
+
+
+        </script>
+    </div>
+
+    <label class="weui-label" style="background:#f0f0f0;width: 100%;height: 10px;margin-bottom: 0px;"> &nbsp;</label>
+    <div class="weui-cells weui-cells_radio " id="order-payment" style="margin-top: 0px;">
+        <script type="text/html" id="order-payment-tpl">
+            <div class="weui-cell__bd weui-cell">
+                <p style="color: #07141e;margin-bottom: 0;">付款方式</p>
+            </div>
+            {{each obj as value i}}
+            <label class="weui-cell weui-check__label pay-method-label" style="margin-bottom: 0;">
+                <div class="weui-cell__bd">
+                    <p style="color: #666;float: left;font-weight: normal;margin-bottom: 0;">{{value.name}}</p>
+                </div>
+                <div class="weui-cell__ft">
+                    <input style="width:100%;" type="radio" class="weui-check payStyle" name="payment.paymentId"
+                           value="{{value.paymentId}}">
+                    <span class="weui-icon-checked"></span>
+                </div>
+            </label>
+            {{/each}}
+        </script>
+    </div>
+    <label class="weui-label" style="background:#f0f0f0;width: 100%;height: 10px;margin-bottom: 0px;"> &nbsp;</label>
+    <div class="weui-cells" style="background-color: #FFFFFF; margin-top: 0px;">
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd" id="addSendTime">
+                <p style="margin-bottom: 0;">配送时间：&nbsp;<input class="weui-input" type="text" id="showSendTime"
+                                                               style="width: auto;"><input type="hidden" name="sendTime"
+                                                                                           id="sendTime"/></p>
+                <p style="color: #FE7E6B;margin-bottom: 0;">当日17:00前下单次日11:00前送达</p>
+            </div>
+            <div class="weui-cell__ft">
+            </div>
+        </a>
+    </div>
+    <label class="weui-label " style="background:#f0f0f0;width: 100%;height: 10px;margin-bottom: 0px;"></label>
+    <div class="weui-cells goods-bought-box" style="background-color: #FFFFFF; margin-top: 0px;">
+        <label class="weui-cell weui-check__label goods-bought-label">
+            <div class="weui-cell__bd">
+                <p style="color: #07141e;float: left;font-weight: normal;margin-bottom: 0;">所购商品</p>
+            </div>
+        </label>
+        <div id="order-goods">
+        </div>
+        <script type="text/html" id="order-goods-tpl">
+            {{each obj.shoppingCartItem as value i}}
+            <label class="weui-cell weui-check__label goods-bought-list"
+                   style="font-weight: normal;margin-bottom: 0;padding-top: 5px;padding-bottom: 5px;color: #666;">
+                <div class="weui-cell__bd">
+                    <input type="hidden" name="orderDetailsList[{{i}}].goodsId" value="{{value.goods.goodsId}}"/>
+                    <input type="hidden" name="orderDetailsList[{{i}}].priceId" value="{{value.goodsPrice.priceId}}"/>
+                    <input type="hidden" name="orderDetailsList[{{i}}].num" value="{{value.quantity}}"/>
+                    <p style="color: #333;float: left;margin-bottom: 0;">{{value.goods.goodsName}}&nbsp;（{{value.goodsPrice.unitName}}）X{{value.quantity}}</p>
+                </div>
+            </label>
+            {{/each}}
+        </script>
+    </div>
+    <label class="weui-label " style="background:#f0f0f0;width: 100%;height: 10px;margin-bottom: 0px;"></label>
+    <div>
+        <label class="weui-cell weui-check__label" style="margin-bottom: 0;">
+            <div class="weui-cell__bd" id="order-amount">
+            </div>
+            <script type="text/html" id="order-amount-tpl">
+                <p style="color: #07141e;font-weight: normal;margin-bottom: 0;">
+                    <span style="color: #07141e;font-size: 16px;">总计：</span>
+                    <span style="float: right;font-size: 16px;">¥ {{obj.totalAmount/100}}</span>
+                </p>
+            </script>
+        </label>
+        <label class="weui-cell weui-check__label infact-pay" style="margin-bottom: 0;">
+            <div class="weui-cell__bd" id="order-amount2">
+            </div>
+            <script type="text/html" id="order-amount2-tpl">
+                <p style="color: #07141e;float: right;font-weight: normal;margin-bottom: 0;">
+                    <span style="font-size: 16px;">实付：</span>
+                    <span style="color: #FEA395;font-size: 16px;">¥ {{obj.needPayAmount/100}}</span>
+                </p>
+            </script>
+        </label>
+    </div>
+    <label class="weui-label" style="background:#f0f0f0;width: 100%;height: 10px;margin-bottom: 0px;"> &nbsp;</label>
+    <div class="weui-cells remarks-detail" style="margin-top: 0;padding-bottom: 20px;">
+        <div class="weui-cell" id="order-commont">
+            <div class="weui-cell__hd">备注：&nbsp;&nbsp;&nbsp;</div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" id="comment" name="comment">
+            </div>
+        </div>
+        <div class="" style="float: left;padding-left: 15px;" id="order-invoiceTag">
+            是否开发票&nbsp;&nbsp;
+            <input type="radio" value="1" name="invoiceTag">是 &nbsp;
+            <input type="radio" value="0" name="invoiceTag">否
+        </div>
+    </div>
+    <!--底部固定按钮  -->
+    <div class="weui-cell__bd">
+        <div class="weui-cell__ft" style="width: 50%; float: left; text-align: center;">
+            <div class="weui-cell" id="order-amount3" style="padding: 14px 15px;">
+            </div>
+            <script type="text/html" id="order-amount3-tpl">
+                <p style="float: left; text-align: center;font-weight: normal;font-size: 14px;margin: 0;color: #333;">
+                    合计：&nbsp;<label style="color: #FEA395;font-weight: normal;font-size: 16px;margin-bottom: 0;">¥ <span
+                        id="total-money">{{obj.needPayAmount/100}}</span></label>
+                </p>
+            </script>
+        </div>
+        <div style="float:right;width:50%;">
+            <a href="javascript:;" class="weui-btn weui-btn_primary"
+               style="background-color: #2CC17B;border-radius: 0px;" id="order_submit">提交订单</a>
+        </div>
+    </div>
+</form>
+</body>
+
+</html>

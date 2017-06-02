@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>产品列表展示</title>
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/index.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./show_goods_list" data-main="/src/js/config.js"></script>
+
+</head>
+<body>
+<script type="text/html" id="show_goods_list-tpl">
+    {{each goodsDataList as value i}}
+        <li>                          
+           <a class="weui-cell weui-cell_access" href="/page/product_detail.html?id={{value.goodsId}}">
+                <div class="weui-cell__hd">
+                    <img
+                            src="{{value.image}}"
+                            alt="" style="display: block;  width: 54px;  height: 54px;"></div>
+                <div class="weui-cell__bd">
+                    <p><label >{{value.goodsName}}</label></p>
+
+                    <p><label style="color: #ff0000;">&nbsp;￥10.5</label></p>
+                </div>
+                <div style="text-align: right; padding-right: 2px;">
+                    <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default;"
+                           style="color: #666666;" onclick="showOrhideGoodspriceList({{value.goodsId}})" id="gg_{{value.goodsId}}">选择规格</a>
+                </div>
+            </a>
+        </li>			
+		<li>
+			<div id="show_goods_price_list_{{value.goodsId}}" style="display:none">
+			</div>
+		</li>
+    {{/each}}
+</script>
+</body>
+
+</html>

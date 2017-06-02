@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>登录</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./login" data-main="/src/js/config.js"></script>
+    <style type="text/css">
+        * {
+            font-family: -apple-system-font, "Helvetica Neue", Helvetica, sans-serif;
+        }
+        .mask {
+            position: absolute;
+            top: 0px;
+            filter: alpha(opacity=60);
+            background-color: #777;
+            z-index: 500;
+            left: 0px;
+            opacity: 0.5;
+            -moz-opacity: 0.5;
+        }
+
+        .li {
+            list-style-type: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <form class="weui-cells weui-cells_form login-form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="tel" name="phone" id="phone" placeholder="请输入手机号">
+            </div>
+        </div>
+        <div class="weui-cell weui-cell_vcode">
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" name="code" id="auto-code" placeholder="请输入短信验证码">
+            </div>
+            <div class="weui-cell__ft">
+                <button type="button" class="weui-vcode-btn" id="code-btn" >获得验证码</button>
+            </div>
+        </div>
+        <a href="javascript:void(0)" class="weui-btn weui-btn_primary" id="bind-btn">登录</a>
+    </form>
+    <!-- <script type="text/javascript" src="/src/libs/jquery-1.11.1.min.js"></script> -->
+    <!-- <script type="text/javascript" src="/src/libs/weui.min.js"></script> -->
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>DOWN-提交订单</title>
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./submit_order" data-main="/src/js/config.js"></script>
+
+</head>
+
+<body class="grey-body">
+    <div id="order-box">
+        <script id="order-box-tpl" type="text/html">
+            {{if receiveState==""}}
+            <a href="/page/address_list.html" rid="{{receive.receiveId}}" id="address-more" class="block clearfix address-more">
+                <div class="fl" style="width:60%;">
+                    <p style="font-size:0.75rem;">{{receive.contact}}/{{receive.tel}}</p>
+                    <p style="font-size:0.8rem;">{{receive.receiveProvince}} {{receive.receiveCity}} {{receive.receiveCounty}} {{receive.receiveAddress}} </p>
+                </div>
+                <i class="iconfont icon-more"></i>
+            </a>
+            {{else}}
+            <a href="/page/add_address.html" class="block clearfix address-more">
+                <div class="fl" style="width:60%;">
+                    <p class="unwrite">请填写收货地址</p>
+                </div>
+                <i class="iconfont icon-more"></i>
+            </a>
+            {{/if}}
+            <div class="weui-form-preview paid-item block clearfix" style="margin-bottom:0;">
+                <div class="weui-form-preview__hd" style="text-align:left;">
+                    <label>商品信息</label>
+                </div>
+            </div>
+            <div class="weui-form-preview__bd white-bg">
+                <div class="weui-form-preview__item b-b">
+                    <div class="clearfix" style="">
+                        <img src="{{allGoods[0].image[0]}}" alt="" style="width:40%;" class="fl">
+                        <div class="fl" style="width:60%;text-align:left;position:relative;padding:0 0 15px 0;">
+                            <h1 style="font-size:0.7rem;padding-left:10px;">{{allGoods[0].goodsName}}</h1>
+                            <p style="font-size:0.5rem;padding-left:10px;">{{allGoods[0].simpleDescribe}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_select weui-cell_select-after white-bg">
+                <div class="weui-cell__hd">
+                    <label for="" class="weui-label">配送方式</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select fr" name="select2" style="width:5rem" id="logistics-list"></select>
+                </div>
+            </div>
+            <div class="white-bg fee-list" style="margin-top:20px;padding-bottom:90px;">
+                <h1 class="" style="font-size:16px;padding-left:15px;line-height:2.5rem;">订单费用</h1>
+                <div class="weui-cells paid-detail">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <p>商品金额：</p>
+                        </div>
+                        <div class="weui-cell__ft" id="goods-price">¥<span>{{allGoods[0].price}}</span></div>
+                    </div>
+                </div>
+                <div class="weui-cells paid-detail">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <p>运费：</p>
+                        </div>
+                        <div class="weui-cell__ft">¥<span id="freight-money">10</span></div>
+                    </div>
+                </div>
+                <div class="weui-cells paid-detail">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <p>付款金额：</p>
+                        </div>
+                        <div class="weui-cell__ft price" style="font-size:0.85rem;">¥ <span id="total-money">1030.0</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix order-submit">
+                <div class="fl">
+                    <img src="/src/image/bottomlogo.png" alt="">
+                </div>
+                <a href="javascript:void(0)" class="block fl" id="submit-btn">提交订单</a>
+            </div>
+        </script>
+    </div>
+</body>
+
+</html>

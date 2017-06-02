@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <title>商品管理</title>
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/src/libs/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/css/manage.css">
+	<script type="text/javascript" src="/src/js/goodsprice_table.js"></script>
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./manage_goods_add" data-main="/src/js/config.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/src/libs/html5shiv.min.js"></script>
+    <script src="/src/libs/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <!--include "../public/manage_sidebar.html"-->
+    <!--include "../public/manage_header.html"-->
+    <div class="container-wrap" >
+        <div class="bread-nav clearfix p-l-lg">
+            <ol>
+                <li class="fl active text-333 text-basic"><a href="javascript:void(0);" onclick="window.history.go(-1);">商品列表&nbsp;&gt;&nbsp;</a></li>
+                <li class="fl active text-333 text-basic"><a href="javascript:void(0);" id="addState">添加商品</a></li>
+            </ol>
+        </div>
+		<div class="modal fade" id="del-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="addinfo">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div>
+					<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请添加规格</h2>
+						<br>规格/单位 <input class="form-control" type="text"
+							id="id_unitName" /> <br>采购价(保留两位小数点) <input
+							class="form-control" type="text" id="id_buyPrice" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"  /> <br>零售价(保留两位小数点)
+						<input class="form-control" type="text" id="id_retailPrice" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"/> <br>批发价(保留两位小数点)
+						<input class="form-control" type="text" id="id_wholesalePrice" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"/>						
+					</div>
+					<div class="modal-body">
+						<div class="m-t-xxl" style="padding-bottom:40px;">
+							<p class="text-md text-666 m-t-xxl m-b-xxl text-left" id="name" style="margin-left:20px;"></p>
+							<div class="text-right" style="margin-right:40px;">
+								<input type="button" value="提交" onclick="addInfo()"
+									id="btn_add"> 
+										<input type="button" value="取消"
+								onclick="hideAddInput()">							
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- <div class="form-group text-basic"
+					style="display:none;"
+					id="addinfo">
+					<div>
+					<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请添加规格</h2>
+						<br>规格/单位 <input class="form-control" type="text"
+							id="id_unitName" /> <br>采购价(保留两位小数点) <input
+							class="form-control" type="text" id="id_buyPrice" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"  /> <br>零售价(保留两位小数点)
+						<input class="form-control" type="text" id="id_retailPrice" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"/> <br>批发价(保留两位小数点)
+						<input class="form-control" type="text" id="id_wholesalePrice" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"/>
+						<br> <input type="button" value="提交" onclick="addInfo()"
+							id="btn_add"> <input type="button" value="取消"
+							onclick="hideAddInput()">
+					</div>
+		</div> -->
+	
+	
+	
+        <form class="form-horizontal p-t-lg" id="form-box">
+            <div id="div-box">
+				<!-- <div class="form-group text-basic"
+					style="display:none;background-color:#FF0000;width:50%"
+					id="addinfo">
+					<div>
+						<br>规格/单位 <input class="form-control" type="text"
+							id="id_unitName" /> <br>采购价(保留两位小数点) <input
+							class="form-control" type="text" id="id_buyPrice" /> <br>零售价(保留两位小数点)
+						<input class="form-control" type="text" id="id_retailPrice" /> <br>批发价(保留两位小数点)
+						<input class="form-control" type="text" id="id_wholesalePrice" />
+						<br> <input type="button" value="提交" onclick="addInfo()"
+							id="btn_add"> <input type="button" value="取消"
+							onclick="hideAddInput()">
+					</div>
+				</div> -->
+                <div class="form-group text-basic">
+                    <div class="col-lg-2 text-right">
+                        <span>商品名称<i class="red p-r-sm">*</i></span>
+                    </div>
+                    <div class="col-lg-5">
+                        <input type="text" name="goodsName" class="form-control" value="" placeholder="输入商品名称">
+                    </div>
+                </div>
+				 <div class="form-group text-basic">
+                    <div class="col-lg-2 text-right">
+                        <span>商品别名<i class="red p-r-sm">*</i></span>
+                    </div>
+                    <div class="col-lg-5">
+                        <input type="text" name="nickName" class="form-control" value="" placeholder="输入商品别名">
+                    </div>
+                </div>
+                <div class="form-group text-basic">
+                    <div class="col-lg-2 text-right">
+                        <span>商品分类<i class="red p-r-sm">*</i></span>
+                    </div>
+                    <div class="col-lg-5">
+						<div class="col-lg-5">
+							<select id="firstLevelList">
+							<option value="0">一级分类</option>
+							</select>
+						</div>
+						<div class="col-lg-5">					
+							<select id="secondLevelList">
+							<option value="0">二级分类</option>
+							</select>
+						</div>
+                        <input type="text" id="categoryId" name="categoryId" class="form-control" value="0" placeholder="输入商品分类" onkeyup="this.value=this.value.replace(/\D/g,'')" style="display:none">						
+                    </div>
+                </div>
+				<div class="form-group text-basic">
+					<div class="col-lg-2 text-right">
+						<span>商品价格<i class="red p-r-sm">*</i> </span>
+					</div>
+					<div class="col-lg-5">
+						<table class="table table-hover m-t" width="80%"
+							style="min-width:100%;" id="table">
+							<thead>
+								<tr>
+									<th style="display:none;">隐藏规格id</th>
+									<th>规格/单位</th>
+									<th>采购价</th>
+									<th>零售价</th>
+									<th>批发价</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+					<div>
+						<a href="javascript:showAddInput();">添加规格</a>
+					</div>
+				</div> 
+                <div class="form-group text-basic">
+                    <div class="col-lg-2 text-right">
+                        <span>商品主图<i class="red p-r-sm">*</i></span>
+                    </div>
+                    <div class="col-lg-10">
+                        <ul id="pic-document-list">
+                             
+                        </ul>
+                        <a href="javascript:void(0);" class="a-upload">
+                            <input type="file" name="" id="pic-upload" value="上传封面图">
+                            <span>点击上传封面图(最多上传6张图片)<span>
+                        </a>
+                    </div>
+                </div>
+                <!-- <div class="form-group text-basic">
+                    <div class="col-lg-2 text-right">
+                        <span>状态<i class="red p-r-sm">*</i></span>
+                    </div>
+                    <div class="col-lg-5">
+                        <label class="radio-inline m-r-lg">
+                            <input type="radio" name="delState" value="1" checked >开启（默认）
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="delState" value="2">关闭
+                        </label>
+                    </div>
+                </div> -->
+				<div class="form-group text-basic">
+						<div class="col-lg-2 text-right">
+							<span>是否上架<i class="red p-r-sm">*</i></span>
+						</div>
+						<div class="col-lg-5">
+							<label class="radio-inline m-r-lg">
+								<input type="radio" name="isMarketable" value="0" checked >未上架（默认）
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="isMarketable" value="1">上架
+							</label>
+						</div>
+					</div>
+                <div class="form-group text-basic">
+                    <div class="col-lg-2 text-right p-t-sm">
+                        <span>推荐到首页<i class="red p-r-sm">*</i></span>
+                    </div>
+                    <div class="col-lg-5">
+                        <label class="radio-inline m-r-lg">
+                            <input type="radio" name="recommend" value="1">是
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="recommend" value="2" checked>否（默认）
+                            <!-- </label> -->
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-lg-2 control-label font-normal text-basic">简要描述<i class="red p-r-sm">*</i></label>
+                    <div class="col-lg-5">
+                        <textarea class="form-control" name="simpleDescribe" rows="3" placeholder="输入描述信息"></textarea>
+                    </div>
+                </div>
+                 <script id="div-box-tpl" type="text/html">					
+                     <div class="form-group text-basic">
+                        <div class="col-lg-2 text-right">
+                            <span>商品名称<i class="red p-r-sm">*</i></span>
+                        </div>
+                        <div class="col-lg-5">
+                            <input type="text" name="goodsName" class="form-control" value="{{obj.goodsName}}" placeholder="输入商品名称">
+                        </div>
+                    </div>
+					<div class="form-group text-basic">
+						<div class="col-lg-2 text-right">
+							<span>商品别名<i class="red p-r-sm">*</i></span>
+						</div>
+						<div class="col-lg-5">
+							<input type="text" name="nickName" class="form-control" value="{{obj.nickName}}" placeholder="输入商品别名">
+						</div>
+					</div>
+                    <div class="form-group text-basic">
+                        <div class="col-lg-2 text-right">
+                            <span>商品分类<i class="red p-r-sm">*</i></span>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="col-lg-5">
+							<select  id="firstLevelList" >
+							<option  value="0">一级分类</option>
+							</select>
+						</div>
+						<div class="col-lg-5">					
+							<select  id="secondLevelList" >
+							<option  value="0">二级分类</option>
+							</select>
+						</div>
+                        <input type="text" id="categoryId" name="categoryId" class="form-control" value="{{obj.categoryId}}" placeholder="输入商品分类" onkeyup="this.value=this.value.replace(/\D/g,'')" style="display:none">
+                        </div>
+                    </div>
+					<div class="form-group text-basic">
+						<div class="col-lg-2 text-right">
+							<span>商品价格<i class="red p-r-sm">*</i> </span>
+						</div>
+						<div class="col-lg-5">
+							<table class="table table-hover m-t" width="80%"
+								style="min-width:100%;" id="table">
+								<thead>
+								<tr>
+									<th style="display:none;">隐藏规格id</th>
+									<th>规格/单位</th>
+									<th>采购价</th>
+									<th>零售价</th>
+									<th>批发价</th>
+									<th>操作</th>
+								</tr>
+								</thead>
+							</table>
+						</div>
+						<div>
+						<a href="javascript:showAddInput();">添加规格</a>
+						</div>
+					</div> 
+                     <div class="form-group text-basic">
+                        <div class="col-lg-2 text-right">
+                            <span>商品主图<i class="red p-r-sm">*</i></span>
+                        </div>
+                        <div class="col-lg-10">
+                            <ul id="pic-document-list" >
+                                 
+                            </ul>
+                            <a href="javascript:void(0);" class="a-upload">
+                                <input type="file" name="" id="pic-upload">
+                                <span>点击上传封面图(最多上传6张图片)<span>
+                            </a>
+                        </div>
+                    </div>
+					<div class="form-group text-basic">
+						<div class="col-lg-2 text-right">
+							<span>是否上架<i class="red p-r-sm">*</i></span>
+						</div>
+						<div class="col-lg-5">
+							<label class="radio-inline m-r-lg">
+								<input type="radio" name="isMarketable" value="0" {{if obj.isMarketable==0}}checked {{/if}}>未上架（默认）
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="isMarketable" value="1" {{if obj.isMarketable==1}} checked {{/if}}>上架
+							</label>
+						</div>
+					</div>
+                    <div class="form-group text-basic">
+                        <div class="col-lg-2 text-right p-t-sm">
+                            <span>推荐到首页<i class="red p-r-sm">*</i></span>
+                        </div>
+                        <div class="col-lg-5">
+                            <label class="radio-inline m-r-lg">
+                                <input type="radio" name="recommend" value="1" {{if obj.recommend==1}} checked {{/if}}>是
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="recommend" value="2" {{if obj.recommend==2}} checked {{/if}}>否
+                                <!-- </label> -->
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-lg-2 control-label font-normal text-basic">简要描述<i class="red p-r-sm">*</i></label>
+                        <div class="col-lg-5">
+                            <textarea class="form-control" name="simpleDescribe" rows="3" placeholder="输入描述信息">{{obj.simpleDescribe}}</textarea>
+                        </div>
+                    </div>
+                </script>
+            </div>
+            <div class="form-group p-b-xl">
+                <label for="" class="col-lg-2 control-label font-normal text-basic">详细描述<i class="red p-r-sm">*</i></label>
+                <div class="col-lg-5">
+                    <!-- 加载编辑器的容器 -->
+                    <script id="container" name="detailDescribe" type="text/plain">
+
+                    </script>
+                </div>
+            </div>
+            <div class="btn-group" style="position: absolute;top:90px;right:0;">
+                <input type="submit" id="submit-btn" value="保存" class="btn btn-primary m-r-lg text-basic">
+                <a href="javascript:void(0)" class="btn btn-default m-r-lg text-basic" onclick="window.history.go(-1);">返回</a>
+            </div>
+        </form>
+    </div>
+	<script type="text/html" id="levelCategoryDataList">
+        {{each dataList as value i}}
+             <option  value="{{value.categoryId}}">{{value.categoryName}}</option>
+        {{/each}}
+    </script>
+</body>
+</html>

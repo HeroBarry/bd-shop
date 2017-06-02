@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>DOWN-支付确认</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <!-- <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./index" data-main="/src/js/config.js"></script> -->
+
+</head>
+
+<body>
+    <div class="weui-cells weui-cells_form pay-check">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">预付金额：</label></div>
+            <div class="weui-cell__bd">
+                <span class="price">¥1030.0</span>
+            </div>
+        </div>
+        <div class="weui-cell pay-method">
+            <div class="weui-cell__hd"><label for="" class="weui-label">支付方式：</label></div>
+            <div class="weui-cell__bd">
+                <img src="/src/image/wechat_pay.png" alt="" style="width:100px;">
+            </div>
+        </div>
+        <!-- <a href="javascript:;" class="weui-btn weui-btn_primary">确认支付</a> -->
+
+    </div>
+    <div class="weui-cells weui-cells_form unpay-money">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">未付金额：</label></div>
+            <div class="weui-cell__bd">
+                <span class="price fr">¥430.0</span>
+            </div>
+        </div>
+        <div class="weui-cell pay-method">
+            <div class="weui-cell__hd"><label for="" class="weui-label"></label></div>
+            <div class="weui-cell__bd">
+                <p>因支付超出微信支付上限，剩下未付金额将由快递员代收</p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/src/libs/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/src/libs/weui.min.js"></script>
+
+    <script>
+    </script>
+</body>
+
+</html>

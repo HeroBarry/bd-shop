@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <title>商品详情</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="icon"/>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
+    <link rel="stylesheet" href="/src/font/iconfont.css"/>
+    <link rel="stylesheet" href="/src/libs/weui.min.css"/>
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css"/>
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css"/>
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./productInfo"
+            data-main="/src/js/config.js"></script>
+    <style type="text/css">
+        li {
+            list-style-type: none;
+        }
+
+        .price-bar:before {
+            right: 15px;
+        }
+
+        .show-pro-detail:before {
+            left: 15px;
+            right: 15px;
+            top: 42px;
+        }
+
+        .show_goods_price_list:after {
+            left: 15px;
+            right: 15px;
+        }
+
+        #show_goods_list:after {
+            border-bottom: none;
+        }
+
+        .show-pro-detail:after {
+            border-bottom: none;
+        }
+
+
+
+    </style>
+</head>
+<body ontouchstart="">
+<div class="page">
+    <div class="page__bd" style="height: 100%;">
+        <div class="weui-tab" style="margin-left: 0px;">
+            <div class="weui-tab__panel" style="margin-left: 0px;">
+                <div id="right" class="weui-flex__item" style="margin-left: 0px; margin-top: 0px;width:100%">
+                    <div style="width: 100%;margin-left: 0px;margin-top: 0px;" id="show_goods_list">
+                        <!--展示商品列表-->
+                        <script type="text/html" id="show_goods_list-tpl">
+                            {{each goodsDataList as value i}}
+                            <li style="list-style-type:none">
+                                <div style="width:100%;margin-left: 0px;margin-top: 0px;padding: 0;">
+                                    <div class="" style="position: relative;">
+                                        <div class="swiper-container" data-space-between='1'
+                                             data-pagination='.swiper-pagination' data-autoplay="1000"
+                                             style="height: 320px;">
+                                            <div class="swiper-wrapper">
+                                                {{each value.image as valueImg i}}
+                                                <div class="swiper-slide" style="overflow:hidden;"><img
+                                                        src="{{valueImg}}" alt="" style="width:100%;"></div>
+                                                {{/each}}
+                                            </div>
+                                        </div>
+                                        <img src="/src/image/collect_true.png" alt=""
+                                             style="display:none;width:24px;position: absolute;bottom: 15px;right: 15px;z-index: 999;"
+                                             id="img_true_{{value.goodsId}}">
+                                        <img src="/src/image/collect_false.png" alt=""
+                                             style="display:none;width:24px;position: absolute;bottom: 15px;right: 15px;z-index: 999;"
+                                             id="img_false_{{value.goodsId}}">
+                                        <span style="position: absolute;bottom: 18px;right: 40px;color: #fff;">收藏</span>
+                                    </div>
+                                </div>
+
+                                <div class="weui-cell price-bar">
+                                    <div class="weui-cell__bd">
+                                        <a class="weui-cell weui-cell_access" style="padding-left: 0;">
+                                            <div class="weui-cell__bd">
+                                                <p style="margin-top: -10px;padding-bottom: 15px;"><label style="font-size: 18px;">{{value.goodsName}}</label>
+                                                </p>
+                                                <p><label style="color: #FF7159;">¥</label><label
+                                                        style="color: #FF7159;"
+                                                        id="one_retailPrice_{{value.vo_priceId}}">{{value.vo_retailPrice}} </label>
+                                                    起
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="weui-cell__ft" style="position: absolute;right: 15px;bottom: 10px;">
+                                        <div class="weui-cell" style="text-align: right; padding-right: 0px;">
+                                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default;"
+                                               style="color: #fff;background: #2BC17A;border-radius: 20px;"
+                                               id="goodsId_{{value.goodsId}}">选择规格</a>
+                                            <!-- 只有一个规格时展示增删改符号-->
+                                            <div class="user-number user-number-sub">
+                                                <img src="/src/image/substact.png" id="one_sub_{{value.vo_priceId}}"
+                                                     style="display: none;  width: 24px;  height: 24px;">
+                                            </div>
+                                            <input pattern="[0-9]*" class="weui-number-input"
+                                                   style="text-align:center;width: 30px; display: none;margin: 0 5px; font-size: initial;border:1px solid #999;border-radius: 0;"
+                                                   value="{{value.vo_shoppingCartNum}}"
+                                                   id="one_edit_{{value.vo_priceId}}"
+
+                                                   data-min="0"
+                                                   data-max="9999"
+                                                   data-step="1">
+                                            <div class="user-number user-number-plus">
+                                                <img src="/src/image/add.png" id="one_add_{{value.vo_priceId}}"
+                                                     style="display: none;  width: 24px;  height: 24px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="list-style-type:none;border-bottom: 10px solid #F0F0F0;">
+                                <div id="show_goods_price_list_{{value.goodsId}}"
+                                     class="weui-cells show_goods_price_list"
+                                     style="width: 100%;display:none;margin-top: 0;">
+                                    <!--  展示规格 -->
+
+                                </div>
+                            </li>
+                            <li style="list-style-type:none">
+                                <div class="weui-cells show-pro-detail">
+                                    <!--  展示产品详情 -->
+                                    <div class="weui-cell">
+                                        <h2 style="font-size: 18px;">商品描述</h2>
+                                    </div>
+                                    <div class="page">
+                                        <div class="page__bd">
+                                            <article class="weui-article">
+                                                <section>
+                                                    {{#value.detailDescribe}}
+                                                </section>
+                                            </article>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-tabbar" style="bottom: 0px;height: 51px; position: fixed;width:100%">
+                <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on"
+                   style="background: #fff;position: relative;text-align: left;border-top: 1px solid #ddd;">
+                    <p style="position: absolute;left: 80px;top: 16px;font-size:18px;color:#2CC27B;">¥<label
+                            id="totalNumber">0.00</label></p>
+                    <div style="position: absolute;top: 5px;">
+                        <div style="position: relative;margin-left:15px;background: #FF715B; width: 45px;height: 45px;border-radius: 50%;text-align: center">
+                            <img src="/src/image/shop.png" id="shoppingCartDetail"
+                                 style="width: 25px;height: 25px;margin-top: 12px;display: inline-block;"/>
+                            <span class="weui-badge"
+                                  style="position: absolute;top: 0.45em;left:28px;background: #fff;color: #FF715B;font-size: xx-small;padding: .05em .3em;"
+                                  id="totalCategory">0</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="/page/order_submit.html" class="weui-btn"
+                   style="background-color:#CCCCCC;color:#FFF;font-size:14px;border-radius: 0;font-size: 18px;padding-left: 30px;padding-right: 30px;line-height: 3.2;"
+                   id="settle_accounts">结算</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="show_goods_price_list-tpl">
+    {{each goodspriceDataList as value i}}
+    <li style="list-style-type:none;background: #F9F9F9;border-bottom: 1px dotted #d9d9d9;">
+        <div class="weui-cell" style="padding-right: 0;">
+            <div class="weui-cell__hd">
+                <p><label style="color: #FF7159;">¥</label><label style="color: #FF7159;"
+                                                                        id="retailPrice_{{value.priceId}}">{{value.retailPrice}}</label><label>/{{value.unitName}}</label>
+                </p>
+            </div>
+            <div class="weui-cell__bd">
+                <p><label>&nbsp;</label></p>
+            </div>
+            <div class="weui-cell__ft">
+                <div class="weui-cell">
+                    <div class="user-number user-number-sub">
+                        <img src="/src/image/substact.png" id="sub_{{value.priceId}}"
+                             style="display: block;  width: 24px;  height: 24px;">
+                    </div>
+                    <input pattern="[0-9]*" class="weui-number-input"
+                           style="text-align:center;width: 30px; display: block;margin: 0 5px;font-size: initial;border:1px solid #999;border-radius: 0;"
+                           value="{{value.buyPrice}}"
+                           id="edit_{{value.priceId}}"
+
+                           data-min="0"
+                           data-max="9999"
+                           data-step="1">
+                    <div class="user-number user-number-plus">
+                        <img src="/src/image/add.png" id="add_{{value.priceId}}"
+                             style="display: block;  width: 24px;  height: 24px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    {{/each}}
+</script>
+</body>
+</html>

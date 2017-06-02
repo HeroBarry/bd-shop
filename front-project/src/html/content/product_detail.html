@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>产品详情</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./product_detail" data-main="/src/js/config.js"></script>
+
+</head>
+
+<body>
+    <div id="pro-box">
+        <script type="text/html" id="pro-box-tpl">
+            <div class="swiper-container" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
+                <div class="swiper-wrapper">
+                    {{each image as value i}}
+                    <div class="swiper-slide" style="overflow:hidden;"><img src="{{value}}" alt="" style="width:100%;"></div>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="pro-detail">
+                <h1>{{goodsName}}</h1>
+                <h2>{{simpleDescribe}}</h2>
+                <h3>¥ {{price}}</h3>
+                <!-- <p>数量：<a href="javascript:void(0);" class="minus">-</a><input type="number" value="0"><a href="javascript:void(0);" class="plus">+</a></p> -->
+            </div>
+            <div class="weui-tab pro-detail-tab">
+                <div class="weui-navbar pro-detail-nav">
+                    <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+                      商品介绍
+                    </a>
+                    <a class="weui-navbar__item" href="#tab2">
+                      售后服务
+                    </a>
+                </div>
+                <div class="weui-tab__bd">
+                    <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active" style="padding-bottom:56px;">
+                        <div style="">{{detailDescribe}}</div>
+                    </div>
+                    <div id="tab2" class="weui-tab__bd-item" style="padding-bottom:56px;">
+                        <img src="/src/image/detail_01.png" alt="" style="width:100%;">
+                        <img src="/src/image/detail_02.png" alt="" style="width:100%;">
+                        <img src="/src/image/detail_03.png" alt="" style="width:100%;">
+                        <img src="/src/image/detail_04.png" alt="" style="width:100%;">
+                        <img src="/src/image/detail_05.png" alt="" style="width:100%;">
+                        <img src="/src/image/detail_06.png" alt="" style="width:100%;">
+                        <img src="/src/image/detail_07.png" alt="" style="width:100%;">
+                        <img src="/src/image/detail_08.png" alt="" style="width:100%;">
+                    </div>
+                </div>
+            </div>
+        </script>
+    </div>
+    <div class="weui-tabbar pro-detail-tabbar">
+        <a href="/" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <i class="iconfont icon-shouye" style="font-size:50px;"></i>
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a href="" id="buy-now-btn" class="weui-tabbar__item weui_bar__item_on" style="border-left:1px solid #fff;border-right:1px solid #fff;margin-top:-5px;">
+            <div class="weui-tabbar__icon">
+                <i class="iconfont icon-gaizhuang" style="font-size:54px;"></i>
+            </div>
+            <p class="weui-tabbar__label">马上改装</p>
+        </a>
+        <a href="/page/member_index.html" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <i class="iconfont icon-huiyuan" style="font-size:50px;"></i>
+            </div>
+            <p class="weui-tabbar__label">会员</p>
+        </a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>安全检测报告</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <link rel="stylesheet" href="/src/libs/weui.css">
+    <script src="/src/libs/weui.min.js"></script>
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./safeDetectReport" data-main="/src/js/config.js"></script>
+    <style type="text/css">
+        /** {*/
+            /*font-family: "微软雅黑", 'Microsoft Yahei', 'Hiragino Sans GB', tahoma, arial, "宋体";*/
+        /*}*/
+        .weui-weixin-title {
+            margin-bottom: 10px;
+            line-height: 1.4;
+            font-weight: 400;
+            font-size: 20px;
+        }
+
+        .weui-weixin-info {
+            margin-bottom: 18px;
+            line-height: 20px;
+            font-size: 0;
+        }
+
+        .weui-weixin-em {
+            color: #8c8c8c;
+            font-style: normal;
+            font-size: 16px;
+            margin-bottom: 10px;
+            margin-right: 12px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body ontouchstart>
+    <div class="container" style="max-width: 600px; margin: 0 auto;padding-bottom: 60px;">
+        <div class="page" id="article-info" style="overflow-y: auto;">
+        </div>
+        <script type="text/html" id="article-tpl">
+            <div class="page__hd" style="padding: 10px;margin:0 10px;border-bottom: 1px solid #ddd;">
+                <h4 class="page__title" style="font-weight: normal;font-size: 16px;">{{obj.title}}</h4>
+                <p class="page__desc" style="color: #999;font-size: 15px;"><span>发布时间：</span>{{obj.createTime}}</p> <!--这里需要载入时间  发布时间：+$(data.time)-->
+            </div>
+            <div class="page__bd">
+                <article class="weui-article">
+                    <section id="article-content">
+                        <!--{{obj.content}}-->
+                    </section>
+                </article>
+            </div>
+        </script>
+        <div class="button-sp-area" style="position:fixed;bottom: 20px;margin-left:5%;width: 90%;">
+            <a href="./safeDetect.html" class="weui-btn weui-btn_primary" style="background: #2BC17A;">更多</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <title>配送方式</title>
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/src/libs/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/css/manage.css">
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./manage_deliver_method" data-main="/src/js/config.js"></script>
+    <!--[if lt IE 9]>
+        <script src="/src/libs/html5shiv.min.js"></script>
+        <script src="/src/libs/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <!--include "../public/manage_sidebar.html"-->
+    <!--include "../public/manage_header.html"-->
+    <div class="container-wrap">
+        <div class="bread-nav clearfix p-l-lg">
+            <ol>
+                <li class="fl active text-333 text-basic"><a href="javascript:void(0);" onclick="window.history.go(-1);">配送管理&nbsp;&gt;&nbsp;</a></li>
+                <li class="fl active text-333 text-basic"><a href="javascript:void(0);" id="addState">添加配送方式</a></li>
+            </ol>
+        </div>
+        <form class="form-horizontal p-t-lg" id="form-box">
+            <div id="div-box">
+                <div class="form-group text-basic">
+                    <div class="col-lg-2 text-right">
+                        <span>配送方式名称<i class="red p-r-sm">*</i></span>
+                    </div>
+                    <div class="col-lg-5">
+                        <input type="text" name="name" class="form-control" value="" placeholder="输入配送方式名称">
+                    </div>
+                </div>
+                <div class="form-group text-basic">
+                    <div class="col-lg-2 text-right">
+                        <span>配送费用<i class="red p-r-sm">*</i></span>
+                    </div>
+                    <div class="col-lg-5">
+                        <input type="text" id="price" name="prices" class="form-control" value="" placeholder="输入配送费用">
+                    </div>
+                </div>
+                <div class="form-group text-basic">
+                    <div class="col-lg-2 text-right p-t-sm">
+                        <span>状态<i class="red p-r-sm">*</i></span>
+                    </div>
+                    <div class="col-lg-5">
+                        <label class="radio-inline m-r-lg">
+                            <input type="radio" name="state" value="1" checked>开启（默认）
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="state" value="2">关闭
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group" style="position: absolute;top:90px;right:0;">
+                <input type="submit" id="submit-btn" value="保存" class="btn btn-primary m-r-lg text-basic">
+                <a href="javascript:void(0)" class="btn btn-default m-r-lg text-basic" onclick="window.history.go(-1);">返回</a>
+            </div>
+        </form>
+        <script id="div-box-tpl" type="text/html">
+            <div class="form-group text-basic">
+                <div class="col-lg-2 text-right">
+                    <span>配送方式名称<i class="red p-r-sm">*</i></span>
+                </div>
+                <div class="col-lg-5">
+                    <input type="text" name="name" class="form-control" value="{{obj.name}}" placeholder="输入配送方式名称">
+                </div>
+            </div>
+            <div class="form-group text-basic">
+                <div class="col-lg-2 text-right">
+                    <span>配送费用<i class="red p-r-sm">*</i></span>
+                </div>
+                <div class="col-lg-5">
+                    <input type="text" id="price" name="prices" class="form-control" value="{{obj.price/100}}" placeholder="输入配送费用">
+                </div>
+            </div>
+            <div class="form-group text-basic">
+                <div class="col-lg-2 text-right p-t-sm">
+                    <span>状态<i class="red p-r-sm">*</i></span>
+                </div>
+                <div class="col-lg-5">
+                    <label class="radio-inline m-r-lg">
+                        <input type="radio" name="state" value="1" {{if obj.state==1}} checked {{/if}}>开启
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="state" value="2" {{if obj.state==2}} checked {{/if}}>关闭
+                    </label>
+                </div>
+            </div>
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+@charset "UTF-8";
+/************************
+ * 描述：
+ * 作者：mjy
+ * 时间：2016-12-12
+************************/
+@import "variable"; // 定义页面容器
+
+.index-menu {
+    width: 100%;
+    height: 56px;
+    position: fixed;
+    bottom: 0;
+    display: box;
+    text-align: center;
+    /* OLD - Android 4.4- */
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;
+    /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    display: flex;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    /* 09版 */
+    -webkit-box-orient: horizontal;
+    /* 12版 */
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    -ms-flex-direction: row;
+    -o-flex-direction: row;
+    flex-direction: row;
+
+    li {
+        -webkit-box-flex: 1;
+        /* OLD - iOS 6-, Safari 3.1-6 */
+        -moz-box-flex: 1;
+        /* OLD - Firefox 19- */
+        width: 20%;
+        /* For old syntax, otherwise collapses. */
+        -webkit-flex: 1;
+        /* Chrome */
+        -ms-flex: 1;
+        /* IE 10 */
+        flex: 1;
+        /* NEW, Spec - Opera 12.1, Firefox 20+ */
+        background: #2a2a2a;
+        padding: 5px 0;
+
+        a {
+            overflow: hidden;
+            display: block;
+
+            i {
+                color: #fff;
+            }
+
+            h2 {
+                font-size: 16px;
+                color: #fefeff;
+                font-weight: lighter;
+                line-height: 20px;
+            }
+        }
+    }
+
+    li.active {
+        a {
+            i {
+                color: #FFCA0A;
+            }
+
+            h2 {
+                color: #FFCA0A;
+            }
+        }
+    }
+}
+
+#toast {
+    .weui_toast_content {
+        font-size: 0.75rem;
+    }
+}

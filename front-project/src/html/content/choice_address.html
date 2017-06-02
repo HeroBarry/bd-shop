@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="Expires" CONTENT="0">
+    <meta http-equiv="Cache-Control" CONTENT="no-cache">
+    <meta http-equiv="Pragma" CONTENT="no-cache">
+    <title>选择收货地址</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./choice_address" data-main="/src/js/config.js"></script>
+    <style>
+        @media screen and (max-width: 320px) {
+            .address-list li .address-text {
+               width: 220px;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="white-body">
+    <ul class="address-list" id="address-list">
+        <script type="text/html" id="address-list-tpl">
+            {{if obj==null}}
+                <p style="text-align: center;padding-top: 40px;color: #999;">暂无收货地址，请添加</p>
+            {{/if}}
+            {{each obj as value i}}
+            <li class="clearfix" rid="{{value.receiveId}}">
+                <div class="fl select hide">
+                    <i class="iconfont icon-selected"></i>
+                </div>
+                <div class="fl text address-text" style="padding-top: 10px;" id="">
+                    <h2>{{value.contact}} / {{value.tel}}</h2>
+                    <p>{{value.receiveProvince}}{{value.receiveCity}}{{value.receiveCounty}} {{value.receiveAddress}}</p>
+                </div>
+                <div class="fr edit">
+                    <a style="height:70px;width:60px;" href="/page/add_address.html?id={{value.receiveId}}" class="block">
+                        <i class="iconfont icon-edit"></i>
+                    </a>
+                </div>
+            </li>
+            {{/each}}
+        </script>
+    </ul>
+    <a href="/page/add_address.html" class="weui-btn weui-btn_primary" style="width:90%;margin-top:50px;background: #2BC17A;">添加</a>
+</body>
+
+</html>

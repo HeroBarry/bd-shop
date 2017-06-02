@@ -1,0 +1,572 @@
+@charset "UTF-8";
+/************************
+ * 描述：
+ * 作者：mjy
+ * 时间：2016-12-12
+************************/
+@import "basic", "variable", "component";
+
+.grey-body {
+  background: #f0f0f0;
+}
+
+* {
+  font-family: -apple-system-font, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.white-bg {
+  background: #fff;
+}
+
+.login-form {
+  margin-top: 0;
+  padding: 20px 15px 0;
+
+  &:after {
+    border-bottom: none;
+  }
+
+  .weui-cell_vcode {
+    &:after {
+      content: " ";
+      position: absolute;
+      left: 0;
+      top: 50px;
+      right: 0;
+      height: 1px;
+      border-top: 1px solid #D9D9D9;
+      color: #D9D9D9;
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+      left: 15px;
+    }
+
+    .weui-vcode-btn {
+      color: #9A9A9A;
+      border: 1px solid #9A9A9A;
+      height: 34px;
+      line-height: 34px;
+      border-radius: 5px;
+      margin: 8px 0;
+    }
+  }
+
+  .weui-btn_primary:not(.weui-btn_disabled):active {
+    background: #53A944;
+    color: #fff;
+  }
+
+  .weui-btn_primary {
+    margin-top: 50px;
+    background: #53A944;
+    color: #fff;
+
+    &:focus {
+      background: #53A944;
+      color: #fff;
+    }
+
+    &:hover {
+      background: #53A944;
+      color: #fff;
+    }
+
+    &:active {
+      background: #53A944;
+      color: #fff;
+    }
+
+    &:visited {
+      background: #53A944;
+      color: #fff;
+    }
+  }
+}
+
+.price {
+  color: #e73953;
+}
+
+.pro-detail {
+  padding: 20px 15px;
+
+  h1 {
+    color: #333;
+    font-size: 16px;
+  }
+
+  h2 {
+    color: #666;
+    font-size: 14px;
+  }
+
+  h3 {
+    color: #e73953;
+    padding: 12px 0;
+  }
+
+  p {
+    color: #666;
+    font-size: 14px;
+
+    span {
+      color: #000;
+      display: inline-block;
+      border: 1px solid #ccc;
+      padding: 0 15px;
+      margin: 0 10px;
+      font-size: 12px;
+      line-height: 20px;
+      text-align: center;
+    }
+  }
+
+  .clearfix {
+    color: #999;
+    font-size: 14px;
+    padding: 20px 0;
+  }
+}
+
+.pay-check {
+  margin-top: 0;
+  padding: 20px 15px 0;
+  border-bottom: 20px solid #e2e2e2;
+
+  &:after {
+    border-bottom: none;
+  }
+
+  .weui-btn_primary {
+    margin-top: 50px;
+  }
+
+  .pay-method {
+    &:after {
+      content: " ";
+      position: absolute;
+      left: 0;
+      top: 50px;
+      right: 0;
+      height: 1px;
+      border-top: 1px solid #D9D9D9;
+      color: #D9D9D9;
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+      left: 15px;
+    }
+
+    p {
+      font-size: 0.5rem;
+    }
+  }
+}
+
+.unpay-money {
+  padding: 0 15px;
+
+  &:after {
+    border-bottom: none;
+  }
+
+  P {
+    text-align: right;
+    color: #e73953;
+  }
+
+  &:before {
+    border-top: none;
+  }
+
+  .weui-cell {
+    &:before {
+      border: none;
+    }
+  }
+}
+
+.pro-detail-nav {
+  .weui-navbar__item {
+    &:after {
+      border: none;
+    }
+    background: #E2E2E2;
+    color: #333;
+  }
+
+  .weui-bar__item--on {
+    background: #ECC124;
+  }
+}
+
+.pro-detail-tabbar {
+  position: fixed;
+  bottom: 0;
+  height: 56px;
+
+  .weui-tabbar__icon {
+    width: 100%;
+    text-align: center;
+    margin-top: 4px;
+
+    i {
+      color: #fff;
+    }
+  }
+
+  .weui-tabbar__item {
+    background: #2A2A2A;
+    color: #fff;
+
+    .weui-tabbar__label {
+      font-size: 16px;
+      line-height: 14px;
+      font-weight: lighter;
+    }
+  }
+
+  .weui_bar__item_on {
+    background: #FFCA0A;
+
+    p {
+      color: #666;
+    }
+
+    i {
+      color: #666;
+    }
+  }
+}
+
+.paid-item {
+  margin-bottom: 10px;
+
+  .order-state-nav {
+    padding: 0 15px;
+    font-size: 0.75rem;
+  }
+
+  .weui-form-preview__hd {
+    label.weui-form-preview__label {
+      color: #333;
+    }
+  }
+
+  .weui-form-preview__label {
+    text-align-last: auto;
+  }
+
+  .b-b {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .order-date {
+    color: #666;
+    font-size: 0.6rem;
+  }
+
+  .weui-btn_plain-default {
+    position: absolute;
+    font-size: 0.6rem;
+    display: inline-block;
+    top: 14px;
+    right: 0;
+    border-radius: 0;
+    color: #e73953;
+    border-color: #e73953;
+  }
+
+  button.to-pay {
+    width: 64px;
+    height: 25px;
+    line-height: 25px;
+    top: 15px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.member-info {
+  margin-bottom: 20px;
+
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 30px 20px;
+  }
+
+  h1 {
+    font-size: 1rem;
+    padding: 36px 0 10px 5px;
+  }
+
+  span {
+    display: inline-block;
+    background: #FFCA0A;
+    padding: 0 18px;
+    color: #fff;
+    border-radius: 15px;
+    font-size: 0.65rem;
+  }
+}
+
+.all-orders {
+  h1 {
+    font-size: 0.8rem;
+    line-height: 2rem;
+
+    i {
+      padding-left: 20px;
+    }
+  }
+
+  ul {
+    display: box;
+    text-align: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    -ms-flex-direction: row;
+    -o-flex-direction: row;
+    flex-direction: row;
+
+    li {
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1;
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+
+      a {
+        p {
+          color: #666;
+          font-size: 0.75rem;
+          padding-top: 5px;
+        }
+        padding: 25px 0;
+      }
+    }
+  }
+}
+
+.member-cells {
+  p {
+    color: #666;
+    font-size: 0.8rem;
+
+    i {
+      color: #666;
+      padding-left: 5px;
+      padding-right: 10px;
+    }
+  }
+}
+
+.address-list {
+  li {
+    height: 90px;
+
+    .select {
+      width: 20px;
+      text-align: center;
+
+      .icon-selected {
+        color: #e73953;
+        font-size: 2rem;
+        line-height: 70px;
+      }
+    }
+
+    .text {
+      width: 250px;
+      padding-left: 20px;
+      padding-top: 20px;
+
+      h2 {
+        color: #333;
+        font-size: 0.7rem;
+      }
+
+      p {
+        color: #333;
+        font-size: 0.75rem;
+      }
+    }
+
+    .edit {
+      i {
+        color: #ddd;
+        padding-right: 20px;
+        line-height: 70px;
+      }
+    }
+
+    .delete {
+      background: #E03A4E;
+      text-align: center;
+      padding: 10px 20px;
+
+      i {
+        color: #fff;
+        line-height: 70px;
+      }
+    }
+    border-bottom: 1px solid #eee;
+  }
+}
+
+.add-address-form {
+  &:before {
+    border: none;
+  }
+
+  &:after {
+    border: none;
+  }
+}
+
+.weui-btn_primary {
+
+}
+
+.weui-btn_primary:not(.weui-btn_disabled):active {
+  background-color: #FFCA0A;
+}
+
+.btn-box {
+  text-align: center;
+
+  &:after {
+    border: none;
+  }
+
+  &:before {
+    border: none;
+  }
+}
+
+.paid-detail {
+  margin-top: 0;
+  font-size: 0.75rem;
+}
+
+.fee-list {
+  .paid-detail {
+    &:after {
+      border: none;
+    }
+  }
+}
+
+.sended {
+  position: absolute;
+  left: 10px;
+  bottom: -5px;
+  font-size: 0.5rem;
+}
+
+.address-more {
+  background: #ECC124;
+  padding: 20px 10px;
+  position: relative;
+
+  i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -10px;
+  }
+}
+
+.order-submit {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background: #fff;
+
+  div {
+    width: 40%;
+    background: #fff;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  a {
+    width: 60%;
+    text-align: center;
+    line-height: 50px;
+    background: #FFCA0A;
+    color: #333;
+  }
+}
+
+.swiper-container {
+  height: 225px;
+}
+
+#pay-btn {
+  width: 90%;
+  margin-top: 30px;
+  background: #53A944;
+  color: #fff;
+
+  &:hover {
+    background: #53A944;
+    color: #fff;
+  }
+
+  &:focus {
+    background: #53A944;
+    color: #fff;
+  }
+}
+
+.order-num {
+  width: 180px;
+  word-wrap: break-word;
+}
+
+.order-address {
+  width: 180px;
+}
+
+.member-order-num {
+  width: 180px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.weui-loadmore_line {
+  .weui-loadmore__tips {
+    background-color: transparent;
+  }
+}
+
+.pro-detail-tab {
+  .weui-tab__bd-item {
+    div {
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+
+  .weui-tab__bd-item {
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>智能终端</title>
+    <!-- Bootstrap -->
+    <link href="./libs/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./libs/bootstrap-switch.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            background: url("./image/bg.png") center center no-repeat;
+        }
+
+        input:focus {
+            border: 0;
+        }
+
+
+
+        .bootstrap-switch {
+            border-radius: 15px;
+        }
+
+        .bootstrap-switch .bootstrap-switch-handle-on {
+            border-bottom-left-radius: 15px;
+            border-top-left-radius: 15px;
+        }
+
+        .panel {
+            margin-top: 25px;
+            background: rgba(255, 255, 255, 0.30);
+            height:338px;
+        }
+
+        .panel-heading {
+            padding: 20px 15px;
+            font-size: 22px;
+        }
+
+        .panel-body {
+            padding: 30px 15px;
+            color: #fff;
+        }
+
+        .panel-default {
+            border-color: #b6b6b7;
+            border: none;
+        }
+
+        .panel-default>.panel-heading {
+            background-color: #b6b6b7;
+            border-color: #b6b6b7;
+        }
+
+        .button {
+            background-color: #444648;
+            color: #fff;
+            border: none;
+        }
+
+        .button:hover {
+            background-color: #F1C30C;
+        }
+
+        .button:focus {
+            border-color: #F1C30C;
+            background-color: none;
+        }
+
+        .btn-warning.active,
+        .btn-warning:active,
+        .open>.dropdown-toggle.btn-warning {
+            background-color: #fad029;
+        }
+
+        .btn-warning.active:hover {
+            background-color: #F1C30C;
+        }
+
+        .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary,
+        .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary {
+            color: #ffffff;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+            background-color: #fad029;
+        }
+
+        .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default,
+        .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default {
+            color: #ffffff;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+            background-color: #444648;
+        }
+
+        .btn-group-sm>.btn,
+        .btn-sm {
+            background: none;
+            border: 1px solid #333;
+            color: #fff;
+        }
+    </style>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <nav class="navbar navbar-default" role="navigation" style="background-color:#fad029;padding: 10px 0;">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" style="color: #0E0E0E;font-weight: bold;font-size:22px;">东仪电子液体肥配肥机控制终端（测试）</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li style="margin-top: 10px;font-size: 20px;"><i class="glyphicon glyphicon-cog"></i></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">氮肥流量</div>
+                    <div class="panel-body">
+                        <!-- <div class="row">
+                            <div class="col-sm-1 col-md-1">
+
+                            </div>
+                            <div class="col-sm-3 col-md-4 text-center">
+                                <button type="button" class="btn btn-warning button active" style="display: block;width: 100%;">自 动</button>
+                            </div>
+                            <div class="col-sm-1 col-md-2">
+
+                            </div>
+                            <div class="col-sm-5 col-md-4 text-center">
+                                <button type="button" class="btn btn-warning button" style="display: block;width: 100%;">手 动</button>
+                            </div>
+                            <div class="col-sm-1 col-md-1">
+
+                            </div>
+                        </div> -->
+                        <!-- <div class="row" style="padding-left: 52px;margin-top:40px;">
+                            <div class="col-sm-5 col-md-4 text-right" style="padding-top: 5px;">
+                                <span>预设流量：</span>
+                            </div>
+                            <div class="col-sm-5 col-md-5">
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-minus"></i></button>
+                                    <input type="text" class="btn btn-warning" style="width:50px;" value="0">
+                                    <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-plus"></i></button>
+                                    <span style="font-size:18px;display: inline-block;margin-left:10px;margin-top:5px;color:#333;">L</span>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="row" style="padding-left: 52px;margin-top:20px;">
+                            <div class="col-sm-5 col-md-4 text-right" style="padding-top: 5px;">
+                                <span>当前流量：</span>
+                            </div>
+                            <div class="col-sm-5 col-md-5">
+                                <div class="btn-group btn-group-sm">
+                                    <input type="text" class="btn btn-warning" style="width:117px;" value="0" readonly>
+                                    <span style="font-size:18px;display: inline-block;margin-left:10px;margin-top:5px;color:#333;">L</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row text-center" style="margin-top:20px;">
+                            <div id="mySwitchA" class="switch">
+                                <input name="my-checkbox" type="checkbox" checked />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-md-2">
+                </div>
+            </div>
+            <div class="col-sm-5 col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">磷肥流量</div>
+                    <div class="panel-body">
+                        <!-- <div class="row">
+                            <div class="col-sm-1 col-md-1">
+
+                            </div>
+                            <div class="col-sm-3 col-md-4 text-center">
+                                <button type="button" class="btn btn-warning button active" style="display: block;width: 100%;">自 动</button>
+                            </div>
+                            <div class="col-sm-1 col-md-2">
+
+                            </div>
+                            <div class="col-sm-5 col-md-4 text-center">
+                                <button type="button" class="btn btn-warning button" style="display: block;width: 100%;">手 动</button>
+                            </div>
+                            <div class="col-sm-1 col-md-1">
+
+                            </div>
+                        </div> -->
+                        <!-- <div class="row" style="padding-left: 52px;margin-top:40px;">
+                            <div class="col-sm-5 col-md-4 text-right" style="padding-top: 5px;">
+                                <span>预设流量：</span>
+                            </div>
+                            <div class="col-sm-5 col-md-5">
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-minus"></i></button>
+                                    <input type="text" class="btn btn-warning" style="width:50px;" value="0">
+                                    <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-plus"></i></button>
+                                    <span style="font-size:18px;display: inline-block;margin-left:10px;margin-top:5px;color:#333;">L</span>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="row" style="padding-left: 52px;margin-top:20px;">
+                            <div class="col-sm-5 col-md-4 text-right" style="padding-top: 5px;">
+                                <span>当前流量：</span>
+                            </div>
+                            <div class="col-sm-5 col-md-5">
+                                <div class="btn-group btn-group-sm">
+                                    <input type="text" class="btn btn-warning" style="width:117px;" value="0" readonly>
+                                    <span style="font-size:18px;display: inline-block;margin-left:10px;margin-top:5px;color:#333;">L</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row text-center" style="margin-top:20px;">
+                            <div id="mySwitchB" class="switch">
+                                <input name="my-checkbox" type="checkbox" checked />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-md-2">
+                </div>
+            </div>
+            <div class="col-sm-5 col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">钾肥流量</div>
+                    <div class="panel-body">
+                        <!-- <div class="row">
+                            <div class="col-sm-1 col-md-1">
+
+                            </div>
+                            <div class="col-sm-3 col-md-4 text-center">
+                                <button type="button" class="btn btn-warning button active" style="display: block;width: 100%;">自 动</button>
+                            </div>
+                            <div class="col-sm-1 col-md-2">
+
+                            </div>
+                            <div class="col-sm-5 col-md-4 text-center">
+                                <button type="button" class="btn btn-warning button" style="display: block;width: 100%;">手 动</button>
+                            </div>
+                            <div class="col-sm-1 col-md-1">
+
+                            </div>
+                        </div> -->
+                        <!-- <div class="row" style="padding-left: 52px;margin-top:40px;">
+                            <div class="col-sm-5 col-md-4 text-right" style="padding-top: 5px;">
+                                <span>预设流量：</span>
+                            </div>
+                            <div class="col-sm-5 col-md-5">
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-minus"></i></button>
+                                    <input type="text" class="btn btn-warning" style="width:50px;" value="0">
+                                    <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-plus"></i></button>
+                                    <span style="font-size:18px;display: inline-block;margin-left:10px;margin-top:5px;color:#333;">L</span>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="row" style="padding-left: 52px;margin-top:20px;">
+                            <div class="col-sm-5 col-md-4 text-right" style="padding-top: 5px;">
+                                <span>当前流量：</span>
+                            </div>
+                            <div class="col-sm-5 col-md-5">
+                                <div class="btn-group btn-group-sm">
+                                    <input type="text" class="btn btn-warning" style="width:117px;" value="0" readonly>
+                                    <span style="font-size:18px;display: inline-block;margin-left:10px;margin-top:5px;color:#333;">L</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row text-center" style="margin-top:20px;">
+                            <div id="mySwitchC" class="switch">
+                                <input name="my-checkbox" type="checkbox" checked />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-md-2">
+                </div>
+            </div>
+            <div class="col-sm-5 col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">总流量</div>
+                    <div class="panel-body">
+                        <div class="row" style="text-align:center;margin-top:25px;">
+                            <div style="padding-top: 5px;">
+                                <img src="./image/water.png" alt="">
+                            </div>
+                        </div>
+                        <div class="row" style="padding-left: 52px;margin-top:20px;">
+                            <div class="col-sm-5 col-md-4 text-right" style="padding-top: 5px;">
+                                <span>配肥总流量：</span>
+                            </div>
+                            <div class="col-sm-5 col-md-5">
+                                <div class="btn-group btn-group-sm">
+                                    <input type="text" class="btn btn-warning" style="width:117px;" value="0" readonly>
+                                    <span style="font-size:18px;display: inline-block;margin-left:10px;margin-top:5px;color:#333;">L</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row text-center" style="margin-top:20px;">
+                            <div id="mySwitchD" class="switch">
+                                <input name="my-checkbox" type="checkbox" checked />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-md-2">
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+        <script src="./libs/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+        <script src="./libs/bootstrap-switch.min.js"></script>
+        <script type="text/javascript">
+            $('input[name="my-checkbox"]').bootstrapSwitch({
+              state:false
+            });
+            window.prettyPrint && prettyPrint();
+            $('input[name="my-checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
+                // $(this).parents(".panel-body").children(".row").eq(1).hide();
+                console.log(this); // DOM element
+                console.log(event); // jQuery event
+                console.log(state); // true | false
+            });
+        </script>
+</body>
+
+</html>

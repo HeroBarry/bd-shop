@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <title>运营-广告管理</title>
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/manage.css">
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./manage_adPosition_list" data-main="/src/js/config.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/lib/html5shiv.min.js"></script>
+    <script src="/lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<!--include "../public/manage_sidebar.html"-->
+<!--include "../public/manage_header.html"-->
+<div class="container-wrap">
+    <div class="bread-nav clearfix p-l-lg">
+        <ol class="fl">
+            <li class="fl active text-333 text-basic"><a href="javascript:void(0);">设置广告</a></li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="m-r-lg m-l-lg">
+            <div class="table-responsive">
+                <table class="table table-hover m-t" width="100%" style="min-width:100%;">
+                    <thead>
+                    <tr>
+                        <th class="font-normal text-basic" width="5%">编号</th>
+                        <th class="font-normal text-basic" width="10%">广告名称</th>
+                        <th class="font-normal text-basic" width="10%">位置</th>
+                        <th class="font-normal text-basic" width="10%">尺寸要求</th>
+                        <th class="font-normal text-basic" width="10%">状态</th>
+                        <th class="font-normal text-basic" width="20%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-666" id="table-list-content">
+
+                    </tbody>
+                    <script id="table-list-tpl" type="text/html">
+                        {{each dataList as value i}}
+                        <tr>
+                            <td><span>{{i+1}}</span></td>
+                            <td><span class="inline-block text-ellipsis text-basic" style="width:180px;">{{value.name}}</span></td>
+                            <td><span class="inline-block text-ellipsis text-basic">{{value.position}}</span></td>
+                            <td><span class="inline-block text-ellipsis text-basic">{{value.measure}}</span></td>
+                            <td><span class="inline-block text-ellipsis text-basic">{{if value.state==1}}开启{{else}}关闭{{/if}}</span></td>
+                            <td><a href="/page/manage_adPosition_edit.html?id={{value.adPositionId}}&lid=6">编辑</a>
+                                <a href="/page/manage_ad_list.html?id={{value.adPositionId}}&lid=6" class="del-btn">查看广告</a></td>
+                        </tr>
+                        {{/each}}
+                    </script>
+                </table>
+                <div id="cloading" class="hide">
+                    <div id="loadmore"></div>
+                </div>
+            </div>
+            <div class="pages fr">
+                <ul id="pagination" class="pagination-container"></ul>
+                <div class="page-sum text-right text-999 text-basic">当前页面总数：<span class="text-333" id="page-sum">0</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--include "../public/del_modal.html"-->
+</body>
+</html>

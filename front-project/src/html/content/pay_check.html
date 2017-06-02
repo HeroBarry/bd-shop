@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>支付订单</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.css">
+        <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./pay_check" data-main="/src/js/config.js"></script>
+
+</head>
+
+<body>
+    <div class="weui-navbar__item " style="background-color:#FFFFFF;padding-top: 30px;" id="">
+        <p  style="color: #FF715B;font-size: 20px;padding: 20px 0 30px;" id="total-money2"></p>
+        <p ></p>
+    </div>
+    <div class="weui-cells weui-cells_radio" style="margin-top: 0;border-top: 10px solid #F0F0F0;border-bottom: 10px solid #F0F0F0;">
+        <label class="weui-cell weui-check__label" for="x11">
+            <img src="/src/image/21_03.png"  style="width: 24px;margin-right: 10px;" />
+            <div class="weui-cell__bd">
+              <p>微信支付</p>
+            </div>
+            <div class="weui-cell__ft">
+                    <input type="radio" class="weui-check" name="radio1" id="x11">
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>
+        <!--<label class="weui-cell weui-check__label" for="x12">
+            <img src="/src/image/21_09.png"/>
+
+            <div class="weui-cell__bd">
+                <p>支付宝支付</p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" name="radio1" class="weui-check" id="x12" checked="checked">
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>-->
+    </div>
+   <!-- <a href="pay_success.html"  class=" weui-btn" style="background-color: #32CD32 ;width: 100%;" >
+        <div class="weui-btn">
+            确认支付 ￥1000,00
+        </div>
+    </a>-->
+    <!--微信支付功能暂未启用 -->
+    <div class="weui-btn" id="pay-btn" style="background:#2BC17A;">
+        确认支付 ¥<label id="total-money">
+    </label>
+    </div>
+</body>
+
+</html>

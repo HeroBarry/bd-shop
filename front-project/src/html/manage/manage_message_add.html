@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <title>添加消息</title>
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/manage.css">
+    <!--<link rel="stylesheet" href="/src/font/message_add.css">-->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./manage_message_add"
+            data-main="/src/js/config.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/lib/html5shiv.min.js"></script>
+    <script src="/lib/respond.min.js"></script>
+
+    <![endif]-->
+</head>
+
+<body>
+<!--include "../public/manage_sidebar.html"-->
+<!--include "../public/manage_header.html"-->
+
+<div class="container-wrap">
+    <div class="bread-nav clearfix p-l-lg">
+        <ol>
+            <li class="fl active text-333 text-basic"><a href="javascript:void(0);">客户中心&nbsp;&gt;&nbsp;</a></li>
+            <li class="fl active text-333 text-basic"><a href="javascript:void(0);">消息推送&nbsp;&gt;&nbsp;</a>
+            </li>
+            <li class="fl active text-333 text-basic"><a href="javascript:void(0);">添加消息推送</a>
+            </li>
+        </ol>
+    </div>
+    <form class="form-horizontal p-t-lg" id="form-box">
+        <div id="div-box">
+            <div class="form-group text-basic">
+                <div class="col-lg-2 text-right">
+                    <span>消息推送名称<i class="red p-r-sm">*</i></span>
+                </div>
+                <div class="col-lg-5">
+                    <input type="text" name="messageTitle" class="form-control" value="">
+                </div>
+            </div>
+            <div class="form-group text-basic">
+                <div class="col-lg-2 text-right">
+                    <span>消息描述<i class="red p-r-sm">*</i></span>
+                </div>
+                <div class="col-lg-5">
+                    <textarea type="text" name="messageContext" class="form-control" value=""
+                    ></textarea>
+                </div>
+            </div>
+            <div class="form-group text-basic">
+                <div class="col-lg-2 text-right">
+                    <span>设置连接跳转<i class="red p-r-sm">*</i></span>
+                </div>
+                <div class="col-lg-5">
+                    <input type="text" name="url" class="form-control" value="">
+                </div>
+            </div>
+            <div class="form-group text-basic">
+                <div class="col-lg-2 text-right p-t-sm">
+                    <span>是否立即推送<i class="red p-r-sm">*</i></span>
+                </div>
+                <div class="col-lg-5">
+                    <label class="radio-inline m-r-lg">
+                        <input type="radio" name="pushNow" value="1" checked>是
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="pushNow" value="2">否
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div>
+            <span class="p-l-lg">指派推送用户</span>
+            <div class="form-group text-basic">
+                <div class="col-lg-2 text-right p-t-sm">
+                    <span>&nbsp;&nbsp;是否指派所有用户<i class="red p-r-sm">*</i></span>
+                </div>
+                <div class="col-lg-5">
+
+                    <label class="radio-inline m-r-lg">
+                        <input type="radio" name="isAll" value="1">是
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="isAll" value="2">否
+
+                    </label>
+
+                </div>
+            </div>
+
+
+            <div class="form-group text-basic">
+                <div class="col-lg-2 text-right p-t-sm">
+
+                </div>
+                <div class="col-lg-5">
+                    <div class="layui-input-block">
+                        <input type="hidden" id="userIds" name="userIds">
+                        <table style="height: 200px;width:500px;border:1px solid #999999;" id="all-user">
+                            <thead>
+                            <tr style="border:1px solid #999999;">
+                                <th class="font-normal text-basic" width="20%">会员所属地址</th>
+                                <th class="font-normal text-basic" width="8%">用户名</th>
+                                <th class="font-normal text-basic" width="8%">会员手机号</th>
+                            </tr>
+                            </thead>
+                            <tbody id="list">
+
+                            </tbody>
+                        </table>
+                        <div id="page" style="display: block;"></div>
+                        <script id="list-tpl" type="text/html">
+                            {{each dataList as value i}}
+                            <tr data="{{value.userId}}">
+                                <td>{{value.country}} {{value.province}} {{value.city}}</td>
+                                <td>{{value.nickname}}</td>
+                                <td>{{value.phone}}</td>
+                            </tr>
+                            {{/each}}
+                        </script>
+                        <table style="width:500px;border:1px solid #999999;margin-top: 20px;">
+                            <thead>
+                            <tr style="border:1px solid #999999;">
+                                <td>已选择推送用户</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </thead>
+                            <tbody id="chosen-box">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</div>
+<div class="btn-group" style="position: absolute;top:90px;right:0;">
+    <input type="submit" id="submit-btn" value="保存" class="btn btn-primary m-r-lg text-basic">
+    <a href="javascript:void(0)" class="btn btn-default m-r-lg text-basic"
+       onclick="window.history.go(-1);">返回</a>
+</div>
+</form>
+<script id="div-box-tpl" type="text/html">
+    <div class="form-group text-basic">
+        <div class="col-lg-2 text-right">
+            <span>消息推送名称<i class="red p-r-sm">*</i></span>
+        </div>
+        <div class="col-lg-5">
+            <input type="text" name="messageTitle" class="form-control"
+                   value="{{obj.messageTitle}}">
+        </div>
+    </div>
+    <div class="form-group text-basic">
+        <div class="col-lg-2 text-right">
+            <span>消息描述<i class="red p-r-sm">*</i></span>
+        </div>
+        <div class="col-lg-5">
+            <input type="text" name="messageContext" class="form-control adName" value="{{obj.messageContext}}"
+                   placeholder="账户名">
+        </div>
+    </div>
+    <div class="form-group text-basic">
+        <div class="col-lg-2 text-right">
+            <span>设置连接跳转<i class="red p-r-sm">*</i></span>
+        </div>
+        <div class="col-lg-5">
+            <input type="text" name="url" class="form-control adName" value="{{obj.url}}"/>
+        </div>
+    </div>
+    <div class="form-group text-basic">
+        <div class="col-lg-2 text-right p-t-sm">
+            <span>是否立即推送<i class="red p-r-sm">*</i></span>
+        </div>
+        <div class="col-lg-5">
+            <label class="radio-inline m-r-lg">
+                <input type="radio" name="pushNow" value="1" {{if obj.pushNow==1}}checked{{/if}}>是
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="pushNow" value="2" {{if obj.pushNow==2}}checked{{/if}}>否
+            </label>
+        </div>
+    </div>
+    <div>
+        指派推送用户
+        <div class="form-group text-basic">
+            <div class="col-lg-2 text-right p-t-sm">
+                <span>&nbsp;&nbsp;是否指派所有用户<i class="red p-r-sm">*</i></span>
+            </div>
+            <div class="col-lg-5">
+                <label class="radio-inline m-r-lg">
+                    <input type="radio" name="isAll" value="1" {{if obj.isAll==1}}checked{{/if}}>是
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="isAll" value="2" {{if obj.isAll==2}}checked{{/if}}>否
+                </label>
+            </div>
+        </div>
+    </div>
+</script>
+</div>
+</body>
+</html>

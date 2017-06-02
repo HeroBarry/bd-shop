@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>购物车详情</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./myShoppingCart" data-main="/src/js/config.js"></script>
+	
+    <style type="text/css">
+        body {
+            line-height: normal;
+        }
+
+        .mask {
+            position: absolute;
+            top: 0px;
+            filter: alpha(opacity=60);
+            background-color: #777;
+            z-index: 500;
+            left: 0px;
+            opacity: 0.5;
+            -moz-opacity: 0.5;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .format-choose:before {
+            border-top: none;
+        }
+
+        .format-choose .weui-cell {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        #settle_accounts:after {
+            border-radius: 0;
+        }
+
+        .format-choose .weui-number-input {
+            margin: 0 5px;
+        }
+
+        .searchbar-result:after {
+            border-bottom: none;
+        }
+
+        #show_goods_list:after {
+            border-bottom: none;
+        }
+
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .weui-actionsheet__menu .weui-actionsheet__cell:before {
+            left: 15px;
+            right: 15px;
+        }
+
+        #showOrhideclearmyshoppingcart div.clearfix {
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+<body ontouchstart="">
+<div class="page">
+    <div class="page__bd" style="">
+        <div class="weui-tab">
+            <div class="weui-tab__panel">
+                <div id="dialogDetail" style="height:100%">
+                    <div id="iosActionsheet">
+                        <div class="weui-actionsheet__cell" style="background-color:#FFF;display:none" id="noshoppingCartInfo">
+                            <div style="text-align:center;">
+                                <img src="/src/image/noshoppingcartitem.png" alt="" style="display: inline-block;width: 125px;margin: 60px 0 30px;">
+                            </div>
+                            <div style="padding-bottom: 36px;">
+                                <label>您的购物车没有商品,快去购买吧！</label>
+                            </div>
+                            <div style="padding: 0 15px;">
+                                <a href="/page/productList.html" class="weui-btn weui-btn_primary "
+                                   style="width:100%;background-color:#2CC27B;">去购买</a>
+                            </div>
+                        </div>
+                        <div class="weui-actionsheet__cell"
+                             id="showOrhideclearmyshoppingcart">
+                            <div class="clearfix" style="margin: 10px 15px 0 15px;padding-bottom: 10px;">
+                                <div style="float:left;margin-left:2px;">
+                                       <a href="javascript:location.href=document.referrer;">返回</a>
+                                </div>
+                                <div style="float:right;margin-right:2px;width:5rem;color:#fff;background-color:#2CC27B;border-radius:1rem;">
+                                     <label id="clearmyshoppingcart">清空购物车</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui-actionsheet__menu" id="show_shoppingCartVO"
+                             style="padding-bottom:52px;">
+                            <!--展示购物车详情  -->
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-loadmore weui-loadmore_line hide" id="noRec">
+                    <span class="weui-loadmore__tips">暂无数据</span>
+                </div>
+                <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot" id="cloading">
+                    <span class="weui-loadmore__tips">加载中</span>
+                </div>
+            </div>
+            <div class="weui-tabbar" style="bottom: 0px; position: fixed;" id="myShoppingCart_tabbar">
+                <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on" style="background: #434345;text-align: left;padding-left: 15px;">
+                    <img src="/src/image/un-choose.png" alt="" style="display:inline-block;  width: 20px;  height: 20px;margin-right: 5px;" id="shopping_isbuy_allOrNotall">
+                    <span style="font-size:16px;color:#fff;padding-right: 15px;">全选</span>
+                    <span style="display:none;" id="totalCategory">0</span>
+                    <span style="font-size:16px;color:#fff;">合计: ¥<label id="totalNumber">0.00</label></span>
+                </a>
+                <a href="/page/order_submit.html" class="weui-btn weui-btn_primary " style="background-color:#434345;font-size:16px;border-radius: 0;" id="settle_accounts">结算</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script type="text/html" id="show_shoppingCartVO-tpl">
+    {{each shoppingCartVODataList as value i}}
+    <div class="weui-actionsheet__cell"  style="display:;" id="div_{{value.priceId}}">
+        <li style="list-style-type:none"  class="clearfix" rid="{{value.priceId}}">
+            <div class="weui-cell">
+                <div class="weui-cell__hd" style="width:20px">
+                    <img class="shopping_isbuy_img" src="" alt="" style="display: block;  width: 20px;  height: 20px;"
+                         id="shopping_isbuy_{{value.priceId}}">
+                </div>
+                <div class="weui-cell__bd">
+                    <a class="weui-cell weui-cell_access" style="padding-right: 0;">
+                        <div class="weui-cell__hd" style="margin-right: 10px;">
+                            <img src="{{value.image[0]}}" alt="" style="display: block;  width: 54px;  height: 54px;">
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p style="font-size:16px;text-align: left;margin-top: -5px;margin-bottom: 10px;"><label>{{value.goodsName}}</label></p>
+                            <p style="font-size:14px;text-align: left;"><label style="font-size:14px;color:  #FF715B;">¥</label><label style="font-size:14px;color:  #FF715B;" id="shopping_retailPrice_{{value.priceId}}">{{value.retailPrice}}</label>/{{value.uniteName}}
+                            </p>
+                        </div>
+                    </a>
+                </div>
+                <div class="weui-cell__ft edit">
+                    <div class="weui-cell"
+                         style="text-align: right; padding-right: 0px;font-size:10px;">
+                        <div class="user-number user-number-sub">
+                            <img src="/src/image/substact.png"
+                                 id="shopping_sub_{{value.priceId}}"
+                                 style="display: block;  width: 24px;  height: 24px;">
+                        </div>
+                        <input pattern="[0-9]*" class="weui-number-input"
+                               style="text-align:center;width: 30px; display: block;margin: 0 5px;"
+                               value="{{value.quantity}}"
+                               id="shopping_edit_{{value.priceId}}"
+
+                               data-min="0"
+                               data-max="9999"
+                               data-step="1">
+
+                        <div class="user-number user-number-plus">
+                            <img src="/src/image/add.png" id="shopping_add_{{value.priceId}}"
+                                 style="display: block;  width: 24px;  height: 24px;">
+                        </div>
+                    </div>
+                </div>
+				<div class="weui-cell__ft fr hide delete" rid="{{value.priceId}}">
+					<i class="iconfont icon-delete" rid="{{value.priceId}}"></i>
+				</div>
+					
+            </div>
+			
+        </li>
+    </div>
+    {{/each}}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <title>管理中心-商品列表</title>
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/manage.css">
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./manage_goods_list" data-main="/src/js/config.js"></script>
+	<script type="text/javascript" src="/src/font/jedate.js">
+	</script>
+	
+    <!--[if lt IE 9]>
+        <script src="/lib/html5shiv.min.js"></script>
+        <script src="/lib/respond.min.js"></script>
+    <![endif]-->
+	<style type="text/css">     
+	.td{border:solid #add9c0; border-width:0px 1px 1px 0px; padding:10px 0px;}
+	.table{border:solid #add9c0; border-width:1px 0px 0px 1px;}
+	.datainp{ width:80px; height:30px; border:1px #ccc solid;}
+	.datep{ margin-bottom:1px;}
+	</style> 
+</head>
+
+<body>
+    <!--include "../public/manage_sidebar.html"-->
+    <!--include "../public/manage_header.html"-->
+    <div class="container-wrap">
+        <div class="bread-nav clearfix p-l-lg">
+            <ol class="fl">
+                <li class="fl active text-333 text-basic"><a href="javascript:void(0);">商品列表</a></li>
+            </ol>
+              <div class="fr">
+                <a href="/page/manage_goods_add.html?lid=0" class="btn btn-primary m-r-lg text-basic">+添加商品</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="m-r-lg m-l-lg">
+                <div class="table-responsive">
+                    <table class="table table-hover m-t " width="100%" style="min-width:100%;">
+                        <thead style="background-color:#F2F2F2">
+                            <tr>
+                                <th class="font-normal text-basic td" width="5%">编号</th>
+                                <th class="font-normal text-basic td" width="10%">商品名称</th>
+                                <th class="font-normal text-basic td" width="17%">商品分类</th>
+                                <th class="font-normal text-basic td" width="15%">添加时间</th>
+                                <th class="font-normal text-basic td" width="10%">是否上架</th>
+                                <!-- <th class="font-normal text-basic td" width="8%">推荐到首页</th> -->
+                                <th class="font-normal text-basic td" width="10%">操作</th>
+                            </tr>
+							<tr>
+								<form class="form-horizontal p-t-lg" id="form-box">
+                                <th class="font-normal text-basic td" width="5%">
+									
+								</th>
+                                <th class="font-normal text-basic td" width="10%">
+									<input type="text" name="goodsName" class="form-control" value="" placeholder="输入商品名称">
+								</th>
+                                <th class="font-normal text-basic td" width="17%">
+									<div class="col-lg-1" style="width:85px">
+									<select  id="firstLevelList" >
+										<option  value="0">一级分类</option>
+									</select>
+									</div>
+									<div class="col-lg-1">					
+										<select  id="secondLevelList" >
+											<option  value="0">二级分类</option>
+										</select>
+									</div>
+									<input type="text" id="categoryId" name="categoryId" class="form-control" value="" placeholder="输入商品分类" onkeyup="this.value=this.value.replace(/\D/g,'')" style="display:none">	
+								</th>
+                                <th class="font-normal text-basic td" width="15%">
+								<div>
+									<input type="text" id="createTime_ge" name="createTime_ge" class="datainp" value="" placeholder="开始日期" readonly>--
+									<input type="text" id="createTime_le" name="createTime_le" class="datainp" value="" placeholder="结束日期" readonly>		
+								</div>								
+								</th>
+                                <th class="font-normal text-basic td" width="10%">
+									<select  id="isMarketable" >
+										<option  value="">全部</option>
+										<option  value="1">是</option>
+										<option  value="0">否</option>
+									</select>
+								</th>
+                               <!--  <th class="font-normal text-basic td" width="8%">----</th> -->
+                                <th class="font-normal text-basic td" width="10%">
+									<input type="button" id="submit-btn-query" value="搜索" class="btn btn-primary" >
+								</th>
+								</form>
+                            </tr>
+                        </thead>
+                        <tbody class="text-666" id="table-list-content">
+
+                        </tbody>
+                        <script id="table-list-tpl" type="text/html">
+                            {{each dataList as value i}}
+                            <tr>
+                                <td class="td"><span>{{i+1}}</span></td>
+                                <td class="td"><span class="inline-block text-ellipsis text-basic" style="width:180px;">{{value.goodsName}}</span></td>
+                                <td class="td"><span class="inline-block text-ellipsis text-basic">{{value.detailDescribe}}</span></td>
+                                <td class="td"><span class="inline-block text-ellipsis text-basic">{{value.createTime}}</span></td>
+                                <td class="td"><span class="inline-block text-ellipsis text-basic">{{if value.isMarketable==1}}是{{else}}否{{/if}}</span></td>
+                                <!-- <td class="td"><span class="inline-block text-ellipsis text-basic">{{if value.recommend==1}}是{{else}}否{{/if}}</span></td> -->
+                                <td class="td"><a href="/page/manage_goods_add.html?id={{value.goodsId}}&lid=0">编辑</a><a href="javascript:void(0)" god="{{value.goodsId}}" gnm="{{value.goodsName}}" class="del-btn">删除</a></td>
+                            </tr>
+                            {{/each}}
+                        </script>
+                    </table>
+                    <div id="cloading" class="hide">
+                        <div id="loadmore"></div>
+                    </div>
+                </div>
+                <div class="pages fr">
+                    <ul id="pagination" class="pagination-container"></ul>
+                    <div class="page-sum text-right text-999 text-basic">当前页面总数：<span class="text-333" id="page-sum">0</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--include "../public/del_modal.html"-->
+	<script type="text/javascript">    
+	jeDate({
+		dateCell:"#createTime_ge",
+		format:"YYYY-MM-DD 00:00:00",
+		isTime:false, 
+		minDate:"2017-04-01 00:00:00",
+		maxDate:"2099-11-8 00:00:00"
+	})
+	jeDate({
+		dateCell:"#createTime_le",
+		format:"YYYY-MM-DD 23:59:59",
+		isTime:false, 
+		minDate:"2017-04-01 00:00:00",
+		maxDate:"2099-11-8 00:00:00"
+	})
+</script>
+<script type="text/html" id="levelCategoryDataList">
+    {{each dataList as value i}}
+      <option  value="{{value.categoryId}}">{{value.categoryName}}</option>
+    {{/each}}
+</script>
+</body>
+</html>

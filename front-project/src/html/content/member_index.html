@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>会员中心</title>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel=icon>
+    <link href="/src/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <link rel="stylesheet" href="/src/libs/weui.min.css">
+    <link rel="stylesheet" href="/src/libs/jquery-weui.min.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./member_index" data-main="/src/js/config.js"></script>
+
+</head>
+
+<body class="grey-body">
+    <div class="clearfix white-bg member-info" id="user-info">
+        <script id="user-info-tpl" type="text/html">
+            <img src="{{headimgurl}}" alt="" class="fl">
+            <div class="fl">
+                <h1>{{nickname}}</h1>
+                <span>{{if phone==""}} <a href="/page/login.html">未设置</a> {{else}}{{phone}} {{/if}}</span>
+            </div>
+        </script>
+    </div>
+    <h1 style="font-size:1rem;padding:5px 15px;background:#fff;font-weight:normal;">我的订单</h1>
+    <div id="order-box" style="">
+
+    </div>
+    <script type="text/html" id="order-box-tpl">
+        {{each dataList as value i}}
+        <a href="/page/order_detail.html?id={{value.orderNumber}}" class="weui-form-preview paid-item block">
+            <div class="weui-form-preview__hd order-state-nav">
+                <label class="weui-form-preview__label member-order-num">DW{{value.orderNumber}}</label>
+                <em class="weui-form-preview__value" style="font-size:1em;">{{if value.state==1}}未付款{{else if value.state==2&&value.orderType==1}}已付款{{else if value.state==2&&value.orderType==2}}已付定金{{/if}}</em>
+            </div>
+            <div class="weui-form-preview__bd">
+                <div class="weui-form-preview__item b-b">
+                    <img src="{{value.image}}" alt="" style="width:40%;" class="fl">
+                    <div class="fl" style="width:60%;text-align:left;">
+                        <h1 style="font-size:16px;padding-left:10px;">{{value.goodsName}}</h1>
+                        <span style="padding-left:10px;" class="price">{{if value.sendState==1}}已发货{{else}}未发货{{/if}}</span>
+                    </div>
+                </div>
+                <div class="weui-form-preview__item" style="text-align:left;position:relative;">
+                    <p>下单时间：{{value.createTime}}</p>
+                    <p>订单金额：<span class="price">¥{{value.totalAmount}}</span></p>
+                    {{if value.state==1}}<button class="weui-btn weui-btn_plain-default to-pay" onum="{{value.orderNumber}}" tAmount="{{value.totalAmount}}">去支付</button>{{/if}}
+                </div>
+                {{if value.sendState==1}}
+                <div class="clearfix">
+                    <p class="fl">物流单号：</p>
+                    <p class="fr">{{value.logisticsNumber}}</p>
+                </div>
+                {{/if}}
+            </div>
+        </a>
+        {{/each}}
+    </script>
+    <div class="weui-loadmore" id="weui-loadmore" style="padding-bottom:80px;">
+        <i class="weui-loading"></i>
+        <span class="weui-loadmore__tips"></span>
+    </div>
+    <div class="weui-loadmore weui-loadmore_line hide" id="weui-none" style="padding-bottom:50px;">
+        <span class="weui-loadmore__tips">暂无数据</span>
+    </div>
+    <!--include "../public/footer.html"-->
+</body>
+
+</html>

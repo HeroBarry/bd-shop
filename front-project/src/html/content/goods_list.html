@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>DOWN-首页</title>
+    <link rel="stylesheet" href="/src/font/iconfont.css">
+    <!-- build:css -->
+    <link rel="stylesheet" href="/css/index.css">
+    <!-- endbuild -->
+    <script id="script" src="/src/libs/require.min.js" defer async="true" require-module="./goods_list" data-main="/src/js/config.js"></script>
+
+</head>
+
+<body>
+    <div class="list-page">
+        <ul class="product-list" id="product-list">
+
+
+        </ul>
+        <script type="text/html" id="product-list-tpl">
+            {{each dataList as value i}}
+            <li>
+                <a href="/page/product_detail.html?id={{value.goodsId}}" class="block">
+                    <img src="{{value.image[0]}}" alt="{{value.goodsName}}">
+                    <div class="pro-description">
+                        <h2>{{value.goodsName}}</h2>
+                        <p>{{value.simpleDescribe}}</p>
+                        <div class="price-tag">
+                            <div class="price"><span>¥</span>{{value.price}}</div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            {{/each}}
+        </script>
+        <div class="weui-loadmore weui-loadmore_line hide" id="noRec">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+        <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot" id="cloading">
+            <span class="weui-loadmore__tips"></span>
+        </div>
+        <footer class="index-footer" style="margin-top:0;">
+            <p>Copyright&copy;2016Corporation All Rights Reserved.</p>
+            <p>&copy;德平国瀚版权所有2016京ICP备15045654号-3</p>
+            <p>Powered By Linkedandes</p>
+        </footer>
+
+    </div>
+
+    <!--include "../public/footer.html"-->
+</body>
+
+</html>
